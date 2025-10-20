@@ -1,0 +1,65 @@
+@extends('layouts.layout_admin')
+
+@section('contenido')
+<div class="container mt-4">
+    <h2 class="mb-4">Lista de Publicaciones</h2>
+
+    <a href="{{ route('admin.publicaciones.create') }}" class="btn btn-primary mb-3">➕ Nueva Publicación</a>
+
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Tipo</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Imagen</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($publicaciones as $publicacion)
+                <tr>
+                    <td>{{ $publicacion->id }}</td>
+                    <td>{{ $publicacion->titulo }}</td>
+                    <td>{{ ucfirst($publicacion->tipo) }}</td>
+                    <td>{{ $publicacion->fecha }}</td>
+                    <td>
+                        <span class="badge {{ $publicacion->estado ? 'bg-success' : 'bg-danger' }}">
+                            {{ $publicacion->estado ? 'Activo' : 'Inactivo' }}
+                        </span>
+                    </td>
+                    <td>
+                        @if($publicacion->imagen)
+                            <img src="{{ asset('storage/'.$publicacion->imagen) }}" width="80">
+                        @else
+                            <span class="text-muted">Sin imagen</span>
+                        @endif
+                    </td>
+                    {{-- <td>
+                        <a href="{{ route('admin.publicaciones.show', $publicacion) }}" class="btn btn-info btn-sm">👁️ Ver</a>
+                        <a href="{{ route('admin.publicaciones.edit', $publicacion) }}" class="btn btn-warning btn-sm">✏️ Editar</a>
+                        <form action="{{ route('admin.publicaciones.destroy', $publicacion) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que deseas eliminar esta publicación?')">🗑️ Eliminar</button>
+                        </form>
+                    </td> --}}
+                    <x-acciones-crud :model="$publicacion" :routeName="'publicaciones'"/>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="7" class="text-center">No hay publicaciones registradas</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+
+    {{ $publicaciones->links() }}
+</div>
+@endsection
