@@ -2,7 +2,7 @@
 @section('contenido')
 <div class="container mt-4">
     <h2>Permisos (Seguramente esto no se verá en el navbar final)</h2>
-    <a href="{{ route('admin.permissions.create') }}" class="btn btn-success mb-2">➕ Nuevo Permiso (para posible futuro crecimiento de la página)</a>
+    <a href="{{ route('admin.permissions.create') }}" class="btn btn-success mb-2">➕ Nuevo Permiso (para posible futuro crecimiento de la página, ahora se crean automaticamente en el backend en "RoleController")</a>
     <table class="table table-bordered">
         <thead>
             <tr>

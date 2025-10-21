@@ -727,12 +727,12 @@ Route::get('admin/permissions', [PermissionController::class, 'index'])->name('a
 // Mostrar formulario de creación
 Route::get('admin/permissions/create', [PermissionController::class, 'create'])
     ->name('admin.permissions.create')
-    ->middleware('permission:Permisos Crear');
+    ->middleware('permission:Permissions Crear');
 
 // Guardar nuevo permiso
 Route::post('admin/permissions', [PermissionController::class, 'store'])
     ->name('admin.permissions.store')
-    ->middleware('permission:Permisos Crear');
+    ->middleware('permission:Permissions Crear');
 
 // Mostrar un permiso
 Route::get('admin/permissions/{permission}', [PermissionController::class, 'show'])
@@ -742,17 +742,17 @@ Route::get('admin/permissions/{permission}', [PermissionController::class, 'show
 // Mostrar formulario de edición
 Route::get('admin/permissions/{permission}/edit', [PermissionController::class, 'edit'])
     ->name('admin.permissions.edit')
-    ->middleware('permission:Permisos Editar');
+    ->middleware('permission:Permissions Editar');
 
 // Actualizar permiso
 Route::put('admin/permissions/{permission}', [PermissionController::class, 'update'])
     ->name('admin.permissions.update')
-    ->middleware('permission:Permisos Editar');
+    ->middleware('permission:Permissions Editar');
 
 // Eliminar permiso (soft delete)
 Route::delete('admin/permissions/{permission}', [PermissionController::class, 'destroy'])
     ->name('admin.permissions.destroy')
-    ->middleware('permission:Permisos Eliminar');
+    ->middleware('permission:Permissions Eliminar');
 
 // Opcional: si quieres un botón extra para "editar roles asignados a permisos"
 // Route::get('admin/permissions/{permission}/editRoles', [PermissionController::class, 'editRoles'])
