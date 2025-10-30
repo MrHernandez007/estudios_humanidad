@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SerieStoreRequest extends FormRequest
 {
@@ -22,9 +24,9 @@ class SerieStoreRequest extends FormRequest
     public function rules()
 {
     return [
-        'nombre' => 'required|max:255|unique:series,nombre',
+        'nombre' => 'required|max:255|unique:series,nombre', // Rule::unique('series', 'nombre')->whereNull('deleted_at'),
         'descripcion' => 'nullable',
-        'estado' => 'required|boolean',
+        'estado' => 'required|in:1,0',//'required|boolean'
     ];
 }
 }

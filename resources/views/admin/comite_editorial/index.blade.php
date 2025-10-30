@@ -54,6 +54,6 @@
         </tbody>
     </table>
 
-    {{ $comite->links() }}
+    {{ $comite->links('pagination::bootstrap-5') }}
 </div>
 @endsection

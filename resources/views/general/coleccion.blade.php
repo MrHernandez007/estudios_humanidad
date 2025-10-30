@@ -9,7 +9,7 @@
         <div class="col-md-5 col-lg-4 mb-4 d-flex align-items-stretch">
             <div class="card w-100 shadow-sm">
                 @if($libro->imagen)
-                    <img src="{{ Storage::url($libro->imagen) }}" class="card-img-top" style="height:220px; object-fit:cover;" alt="{{ $libro->titulo }}">
+                    <img src="{{ Storage::url($libro->imagen) }}" class="card-img-top" style="height:400px; object-fit:cover;" alt="{{ $libro->titulo }}">
                 @else
                     <img src="{{ asset('images/default-libro.png') }}" class="card-img-top" style="height:220px; object-fit:cover;" alt="Sin imagen">
                 @endif

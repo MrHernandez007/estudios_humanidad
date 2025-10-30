@@ -28,8 +28,10 @@ class LibrosPublicController extends Controller
     // Buscar el tipo por id
     $tipoSeleccionado = \App\Models\Tipo::findOrFail($tipo);
 
-    // Filtrar libros de ese tipo
-    $libros = \App\Models\Libro::where('tipos_id', $tipoSeleccionado->id)->get();
+    // Filtrar libros de ese tipo y activos
+    $libros = \App\Models\Libro::where('tipos_id', $tipoSeleccionado->id)
+                                ->where('estado', 1) // solo activos
+                                ->get();
 
     return view('general.coleccion', compact('libros', 'tipoSeleccionado'));
 }
@@ -42,12 +44,40 @@ class LibrosPublicController extends Controller
     //     return view('general.detalle', compact('libro'));
     // }
 
-    public function show($id)
+    public function showsinestado($id)
 {
     $libro = Libro::with(['autores', 'serie', 'tipo', 'capitulos.autores'])->findOrFail($id);
-    
 
     return view('general.detalle', compact('libro'));
 }
+
+public function shownofu($id)
+{
+    // Solo traer el libro si está activo
+    $libro = Libro::with(['autores', 'serie', 'tipo', 'capitulos.autores'])
+                  ->where('estado', 1)   // solo activos
+                  ->findOrFail($id);
+
+    return view('general.detalle', compact('libro'));
+}
+
+public function show($id)
+{
+    // Cargar el libro con sus relaciones, aplicando el filtro
+    // de estado a cada relación que deba ser filtrada.
+    $libro = Libro::where('estado', 1)
+                  ->with(['autores' => function ($query) {
+                      $query->where('estado', 1);
+                  }, 'serie', 'tipo', 'capitulos' => function ($query) {
+                      $query->where('estado', 1)
+                            ->with(['autores' => function ($query) {
+                                $query->where('estado', 1);
+                            }]);
+                  }])
+                  ->findOrFail($id);
+
+    return view('general.detalle', compact('libro'));
+}
+
 
 }

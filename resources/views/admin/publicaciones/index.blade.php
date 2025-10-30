@@ -60,6 +60,6 @@
         </tbody>
     </table>
 
-    {{ $publicaciones->links() }}
+    {{ $publicaciones->links('pagination::bootstrap-5') }}
 </div>
 @endsection

@@ -69,8 +69,13 @@ class CapitulosController extends Controller
 
     public function edit(Capitulo $capitulo)
     {
-        $libros = Libro::where('estado',1)->get();
-        $autores = Autor::where('estado',1)->get();
+        $libros = Libro::where('estado',1)
+                    ->orderBy('id', 'desc') // el último añadido primero
+                    ->get();
+        
+        $autores = Autor::where('estado',1)
+                    ->orderBy('id', 'desc') // el último añadido primero
+                    ->get();
         $capitulo->load('autores');
         return view('admin.capitulos.edit', compact('capitulo','libros','autores'));
     }

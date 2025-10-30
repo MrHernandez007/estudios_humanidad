@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SerieUpdateRequest extends FormRequest
 {
@@ -22,9 +23,9 @@ class SerieUpdateRequest extends FormRequest
     public function rules()
 {
     return [
-        'nombre' => 'required|max:255|unique:series,nombre,' . $this->serie->id,
+        'nombre' => 'required|max:255|unique:series,nombre,' . $this->serie->id,  
         'descripcion' => 'nullable',
-        'estado' => 'required|boolean',
+        'estado' => 'required|in:1,0',//'required|boolean'
     ];
 }
 

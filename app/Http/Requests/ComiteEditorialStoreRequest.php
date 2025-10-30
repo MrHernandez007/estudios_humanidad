@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
+use Illuminate\Validation\Rule;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -26,10 +27,27 @@ class ComiteEditorialStoreRequest extends FormRequest
     //     ];
     // }
 
-    public function rules(): array
+//     public function rules(): array
+// {
+//     return [
+//         'nombre'      => 'required|string|max:255',
+//         'apellido'    => 'required|string|max:255',
+//         'dependencia' => 'required|string|max:255',
+//         'pais'        => 'required|string|max:255',
+//         'estado'      => 'required|boolean',
+//     ];
+// }
+
+public function rules(): array
 {
     return [
-        'nombre'      => 'required|string|max:255',
+        'nombre' => [
+            'required',
+            'string',
+            'max:255',
+            Rule::unique('autores', 'nombre') // 👈 aquí indicamos el campo explícitamente
+                ->whereNull('deleted_at'),     // ignora los eliminados
+        ],
         'apellido'    => 'required|string|max:255',
         'dependencia' => 'required|string|max:255',
         'pais'        => 'required|string|max:255',

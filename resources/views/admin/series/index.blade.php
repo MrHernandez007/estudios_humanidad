@@ -48,6 +48,6 @@
         </tbody>
     </table>
 
-    {{ $series->links() }}
+    {{ $series->links('pagination::bootstrap-5') }}
 </div>
 @endsection

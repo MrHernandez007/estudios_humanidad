@@ -4,9 +4,11 @@
 
 <h1>{{ $libro->titulo }}</h1>
 
-<img src="{{ asset($libro->imagen) }}" alt="{{ $libro->titulo }}" class="img-fluid mb-3">
+{{-- <img src="{{ asset($libro->imagen) }}" alt="{{ $libro->titulo }}" class="img-fluid mb-3"> --}}
+<img src="{{ Storage::url($libro->imagen) }}" alt="{{ $libro->titulo }}" class="img-fluid mb-3">
 
-<h2>Autores del libro?</h2>
+
+<h2>Autores</h2>
 
 @php
     $roles = ['autor_libro' => 'Autor', 
@@ -46,14 +48,24 @@
 
 {{-- verificar los autores aca para ver si son presentadores, etc --}}
 
-<p><strong>Resumen:</strong> {{ $libro->resumen }}</p>
+{{-- <p><strong>Resumen:</strong> {{ $libro->resumen }}</p> para respetar los saltos de linea--}}
+<p><strong>Resumen:</strong>  {!! nl2br(e($libro->resumen)) !!}</p>
+
 {{-- <p><strong>Reseña:</strong> {{ $libro->resena }}</p>  NO SE USA--}}
-<p><strong>Palabras clave:</strong> {{ $libro->palabras_clave }}</p>
+{{-- <p><strong>Palabras clave:</strong> {{ $libro->palabras_clave }}</p> --}}
+@if(!empty($libro->palabras_clave))
+    <p><strong>Palabras clave:</strong> {{ $libro->palabras_clave }}</p>
+@endif
+
 
 <p><strong>ISBN:</strong> {{ $libro->isbn }}</p>
-<p><strong>ISBN colección:</strong> {{ $libro->isbn_coleccion }}</p>
 
-<p><strong>Cómo citar:</strong> {{ $libro->cita }}</p>
+{{-- <p><strong>ISBN colección:</strong> {{ $libro->isbn_coleccion }}</p> --}}
+@if(!empty($libro->isbn_coleccion))
+    <p><strong>ISBN colección:</strong> {{ $libro->isbn_coleccion }}</p>
+@endif
+
+{{-- <p><strong>ISBN colección:</strong> {{ $libro->isbn_coleccion }}</p> --}}
 
 @if($libro->pdf)
     <p><strong>Documento:</strong> <a href="{{ asset('storage/' . $libro->pdf) }}" target="_blank">📄 Ver PDF</a></p>
@@ -68,13 +80,15 @@
 
         @if($capitulo->autores->isNotEmpty())
             <p>
-                <strong>Autores del capítulo:</strong>
+                <strong>Autor(es) del capítulo:</strong>
                 {{ $capitulo->autores->map(fn($a) => $a->nombre . ' ' . $a->apellido)->join(', ') }}
             </p>
         @endif
 
-        @if($capitulo->descripcion)
-            <p>{{ $capitulo->descripcion }}</p> 
+        @if($capitulo->cita_articulo)
+            <p> <strong>cita del capítulo:</strong>
+                {{ $capitulo->cita_articulo }}
+            </p> 
             {{-- <strong>Descripción:</strong> <br> --}}
         @endif
     </div>

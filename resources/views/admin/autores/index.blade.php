@@ -31,18 +31,7 @@
                             {{ $autor->estado ? 'Activo' : 'Inactivo' }}
                         </span>
                     </td>
-                    {{-- <td>
-                        {{-- @include('botones',$areP) --}
-                        <a href="{{ route('admin.autores.show', $autor) }}" class="btn btn-info btn-sm">👁️ Ver</a>
-                        <a href="{{ route('admin.autores.edit', $autor) }}" class="btn btn-warning btn-sm">✏️ Editar</a>
-                        <form action="{{ route('admin.autores.destroy', $autor) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que deseas eliminar este autor?')">🗑️ Eliminar</button>
-                        </form>
-                    </td> --}}
-                    {{-- Botones de acciones según permisos --}}
-                        {{-- <x-acciones-crud :model="$autor" route-name="autores"/> --}}
+
                         <x-acciones-crud :model="$autor" :routeName="'autores'"/>
 
                 </tr>
@@ -54,6 +43,8 @@
         </tbody>
     </table>
 
-    {{ $autores->links() }}
+    {{-- {{ $autores->links() }} --}}
+    {{ $autores->links('pagination::bootstrap-5') }}
+
 </div>
 @endsection

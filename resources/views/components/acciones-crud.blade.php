@@ -11,12 +11,7 @@
         @if(auth()->user()->hasRole(['admin', 'SuperAdmin']))
             <a href="{{ route("admin.{$routeName}.edit", $model) }}" class="btn btn-warning btn-sm">Editar</a>
         @endif
-
-        {{-- Editar permisos: solo admin o superadmin --}}
-        {{-- @if(auth()->user()->hasRole(['SuperAdmin']) && isRoute('roles',) $routeName == 'roles' ) {{--usar el is route--}
-            <a href="{{ route("admin.{$routeName}.editPermissions", $model) }}" class="btn btn-primary">Permisos</a>
-        @endif --}}
-
+        
         {{-- Editar permisos: solo SuperAdmin y en la ruta de roles --}}
         @if(auth()->user()->hasRole('SuperAdmin') && Route::is('admin.roles.index'))
             <a href="{{ route("admin.roles.editPermissions", $model) }}" class="btn btn-primary">Permisos</a>

@@ -35,7 +35,7 @@ class LibrosController extends Controller
     /**
      * Mostrar formulario de creación
      */
-    public function create()
+    public function createSINORDENALFABETICO()
     {
         $series = Serie::where('estado', 1)->get();
         // $autores = Autor::all();
@@ -46,6 +46,24 @@ class LibrosController extends Controller
         
         return view('admin.libros.create', compact('series', 'autores', 'tipos'));
     }
+
+    public function create()
+{
+    $series = Serie::where('estado', 1)
+        ->orderBy('nombre', 'asc')
+        ->get();
+
+    $autores = Autor::where('estado', 1)
+        ->orderBy('nombre', 'asc')
+        ->get();
+
+    $tipos = Tipo::where('estado', 1)
+        ->orderBy('nombre', 'asc')
+        ->get();
+    
+    return view('admin.libros.create', compact('series', 'autores', 'tipos'));
+}
+
 
     /**
      * Guardar un libro nuevo
@@ -174,7 +192,7 @@ class LibrosController extends Controller
     /**
      * Mostrar formulario de edición
      */
-    public function edit(Libro $libro)
+    public function editSINORDENALFABETICO(Libro $libro)
     {
         $series = Serie::where('estado', 1)->get();
         $autores = Autor::all();
@@ -182,6 +200,27 @@ class LibrosController extends Controller
         $libro->load('autores'); // cargar relación
         return view('admin.libros.edit', compact('libro', 'series', 'autores', 'tipos'));
     }
+
+
+    public function edit(Libro $libro)
+{
+    $series = Serie::where('estado', 1)
+        ->orderBy('nombre', 'asc')
+        ->get();
+
+    $autores = Autor::where('estado', 1)
+        ->orderBy('nombre', 'asc')
+        ->get();
+
+    $tipos = Tipo::where('estado', 1)
+        ->orderBy('nombre', 'asc')
+        ->get();
+
+    $libro->load('autores'); // cargar relación
+
+    return view('admin.libros.edit', compact('libro', 'series', 'autores', 'tipos'));
+}
+
 
     /**
      * Actualizar un libro

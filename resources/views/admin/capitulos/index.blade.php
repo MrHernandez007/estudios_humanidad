@@ -2,7 +2,7 @@
 @section('contenido')
 <div class="container mt-4">
     <h2>Capítulos</h2>
-    <a href="{{ route('admin.capitulos.create') }}" class="btn btn-success mb-2">➕ Nuevo Capítulo</a>
+    <a href="{{ route('admin.capitulos.create') }}" class="btn btn-primary mb-3">➕ Nuevo Capítulo</a>  {{-- class="btn btn-success mb-2" --}}
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
@@ -47,6 +47,6 @@
             @endforeach
         </tbody>
     </table>
-    {{ $capitulos->links() }}
+    {{ $capitulos->links('pagination::bootstrap-5') }}
 </div>
 @endsection

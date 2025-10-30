@@ -24,6 +24,21 @@
             <input type="text" name="titulo" id="titulo" class="form-control" value="{{ $libro->titulo }}" required>
         </div>
 
+        {{-- Tipo --}}
+        <div class="mb-3">
+            <label for="tipo" class="form-label">Colección</label>
+            <select name="tipos_id" id="tipo" class="form-select">
+                <option value="">-- Seleccione tipo --</option>
+                @foreach($tipos as $tipo)
+                    <option value="{{ $tipo->id }}" {{ $libro->tipos_id == $tipo->id ? 'selected' : '' }}>
+                        {{ $tipo->nombre }}
+                    </option>
+                @endforeach
+            </select>
+
+
+        </div>
+
         <div class="mb-3">
             <label for="volumen" class="form-label">Volumen</label>
             <input type="text" name="volumen" id="volumen" class="form-control" value="{{ $libro->volumen }}">
@@ -36,7 +51,7 @@
 
         <div class="mb-3">
             <label for="resumen" class="form-label">Resumen</label>
-            <textarea name="resumen" id="resumen" class="form-control">{{ $libro->resumen }}</textarea>
+            <textarea name="resumen" id="resumen" class="form-control" rows="10">{{ $libro->resumen }}</textarea>
         </div>
 
         <div class="mb-3">
@@ -59,15 +74,15 @@
             <textarea name="palabras_clave" id="palabras_clave" class="form-control">{{ $libro->palabras_clave }}</textarea>
         </div>
 
-        <div class="mb-3">
-            <label for="resena" class="form-label">Reseña</label>
+        {{-- <div class="mb-3">
+            <label for="resena" class="form-label">Reseña(por quitar)</label>
             <textarea name="resena" id="resena" class="form-control">{{ $libro->resena }}</textarea>
         </div>
 
         <div class="mb-3">
-            <label for="documento" class="form-label">Documento (texto o URL)</label>
+            <label for="documento" class="form-label">Documento (texto o URL)(por quitar)</label>
             <textarea name="documento" id="documento" class="form-control">{{ $libro->documento }}</textarea>
-        </div>
+        </div> --}}
 
         {{-- Serie --}}
         <div class="mb-3">
@@ -99,6 +114,8 @@
             @endphp
             <option value="autor_libro" {{ in_array('autor_libro', $selectedRoles) ? 'selected' : '' }}>Autor</option>
             <option value="coordinador" {{ in_array('coordinador', $selectedRoles) ? 'selected' : '' }}>Coordinador</option>
+            <option value="editor" {{ in_array('editor', $selectedRoles) ? 'selected' : '' }}>Editor</option>
+            <option value="compilador" {{ in_array('compilador', $selectedRoles) ? 'selected' : '' }}>Compilador</option>
             <option value="presentador" {{ in_array('presentador', $selectedRoles) ? 'selected' : '' }}>Presentador</option>
             <option value="Preface/Foreword" {{ in_array('Preface/Foreword', $selectedRoles) ? 'selected' : '' }}>Preface/Foreword</option>
         </select>
@@ -117,6 +134,8 @@
         <select name="roles[0][roles][]" class="form-select me-2" multiple>
             <option value="autor_libro">Autor</option>
             <option value="coordinador">Coordinador</option>
+            <option value="editor">Editor</option>
+            <option value="compilador">Compilador</option>
             <option value="presentador">Presentador</option>
             <option value="Preface/Foreword">Preface/Foreword</option>
         </select>
@@ -155,20 +174,20 @@ document.addEventListener('click', function(e){
 </script>
 
 
-        {{-- Tipo --}}
+        {{-- Tipo
         <div class="mb-3">
             <label for="tipo" class="form-label">Tipo</label>
             <select name="tipos_id" id="tipo" class="form-select">
-    <option value="">-- Seleccione tipo --</option>
-    @foreach($tipos as $tipo)
-        <option value="{{ $tipo->id }}" {{ $libro->tipos_id == $tipo->id ? 'selected' : '' }}>
-            {{ $tipo->nombre }}
-        </option>
-    @endforeach
-</select>
+                <option value="">-- Seleccione tipo --</option>
+                @foreach($tipos as $tipo)
+                    <option value="{{ $tipo->id }}" {{ $libro->tipos_id == $tipo->id ? 'selected' : '' }}>
+                        {{ $tipo->nombre }}
+                    </option>
+                @endforeach
+            </select>
 
 
-        </div>
+        </div> --}}
 
         {{-- PDF --}}
         {{-- <div class="mb-3">

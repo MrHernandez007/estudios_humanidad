@@ -5,39 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Estudios Humanidad')</title>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet"> <!-- Para la tipografía -->
+
 </head>
 <body>
 
-    <img src="{{ asset('imagenes/ColeccionEstudiosDeLaHumanidad.png') }}" alt="imagen_coleccion" class="img-fluid">
+    {{-- <img src="{{ asset('imagenes/ColeccionEstudiosDeLaHumanidad.png') }}" alt="imagen_coleccion" class="img-fluid"> --}}
 
 
     <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg" style="background-color: #fff; border-bottom: 1px solid #ddd;">
+<nav class="navbar navbar-expand-lg" style="background-color: #EDE4CA; border-bottom: 1px solid #ddd; color: #FFFFFF; font-family: 'Michroma', sans-serif;">
+
+
     <div class="container">
 
         <!-- Links de navegación centrados -->
         <div class="mx-auto"> <!-- Este div centrará el contenido -->
             <ul class="navbar-nav d-flex flex-row">
                 <li class="nav-item px-5 border-end">
-                    <a class="nav-link {{ request()->routeIs('general.inicio') ? 'fw-bold text-dark' : 'text-muted' }}" 
+                    <a class="nav-link {{ request()->routeIs('general.inicio') ? 'fw-bold' : '' }}" 
+                        style="color: #FFFFFF;" 
                        href="{{ route('general.inicio') }}">
+                        <img src="{{ asset('imagenes/logos/1A_Logo_blanco_circulo_ROJO.png') }}" 
+                            alt="Logo" 
+                            width="30" 
+                            height="30" 
+                            class="d-inline-block me-2 align-text-top">
                         Inicio
                     </a>
                 </li>
+
                 <li class="nav-item px-5 border-end">
-                    <a class="nav-link {{ request()->routeIs('general.coleccion') && request()->route('tipo') == 7 ? 'fw-bold text-dark' : 'text-muted' }}" 
+                    <a class="nav-link {{ request()->routeIs('general.coleccion') && request()->route('tipo') == 7 ? 'fw-bold' : '' }}" 
+                        style="color: #FFFFFF;" 
                        href="{{ route('general.coleccion', 7) }}"> 
                         Estudios de la Humanidad
                     </a>
                 </li>
                 <li class="nav-item px-5 border-end">
-                    <a class="nav-link {{ request()->routeIs('general.coleccion') && request()->route('tipo') == 8 ? 'fw-bold text-dark' : 'text-muted' }}" 
+                    <a class="nav-link {{ request()->routeIs('general.coleccion') && request()->route('tipo') == 8 ? 'fw-bold' : '' }}" 
+                        style="color: #FFFFFF;" 
                        href="{{ route('general.coleccion', 8) }}">
                         Estudios del Hombre
                     </a>
                 </li>
                 <li class="nav-item px-5">
-                    <a class="nav-link {{ request()->routeIs('general.coleccion') && request()->route('tipo') == 9 ? 'fw-bold text-dark' : 'text-muted' }}" 
+                    <a class="nav-link {{ request()->routeIs('general.coleccion') && request()->route('tipo') == 9 ? 'fw-bold' : '' }}"
+                        style="color: #FFFFFF;"  
                        href="{{ route('general.coleccion', 9) }}">
                         Revista Estudios del Hombre
                     </a>
@@ -53,14 +67,15 @@
 
 
     <!-- CONTENIDO -->
-    {{-- <div style="background-color: #FEF8F0;"> Fondo color crema --}}
+    <div style="background-color: #FFFFFF; font-family: 'Michroma', sans-serif;">  <!-- Color del Fondo y tipografía -->
 
     {{-- <div class="container my-5"> --}}
         @yield('contenido')
-    {{-- </div> --}}
+    </div> 
 
     <!-- FOOTER -->
-    <footer class="bg-light text-dark pt-5">
+    <footer style="background-color: #EDE4CA; color: #FFFFFF; font-family: 'Michroma', sans-serif;">
+
     <div class="container">
         <div class="row text-center text-md-start justify-content-center">
             <!-- Dirección -->
