@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('fecha')->nullable();
             $table->string('imagen')->nullable();
             $table->boolean('estado')->default(true);
-            $table->string('tipo')->nullable(); // según tu modelo, es texto, no FK
+            $table->string('tipo')->nullable(); 
             $table->softDeletes();
             $table->timestamps();
         });

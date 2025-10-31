@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class LibroStoreRequest extends FormRequest
 {
@@ -19,27 +20,64 @@ class LibroStoreRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+    // public function rules(): array
+    // {
+    //     return [
+    //         'titulo'          => 'required|max:255|unique:libros,titulo',
+    //         'volumen'         => 'nullable|max:50',
+    //         'anio'            => 'nullable|digits:4|integer',
+    //         'resumen'         => 'nullable',
+    //         'cita'            => 'nullable',
+    //         'isbn'            => 'nullable|max:20',
+    //         'isbn_coleccion'  => 'nullable|max:20',
+    //         'palabras_clave'  => 'nullable',
+    //         'resena'          => 'nullable',
+    //         'documento'       => 'nullable',
+    //         'pdf'             => 'required',
+    //         'estado'          => 'required|boolean',
+    //         'series_id'       => 'nullable|exists:series,id',
+    //         'tipos_id'         => 'required|in:7,8,9',
+    //         'imagen'          => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
+    //         'roles'           => 'nullable|array',
+    //     ];
+    // }
+
     public function rules(): array
-    {
-        return [
-            'titulo'          => 'required|max:255|unique:libros,titulo',
-            'volumen'         => 'nullable|max:50',
-            'anio'            => 'nullable|digits:4|integer',
-            'resumen'         => 'nullable',
-            'cita'            => 'nullable',
-            'isbn'            => 'nullable|max:20',
-            'isbn_coleccion'  => 'nullable|max:20',
-            'palabras_clave'  => 'nullable',
-            'resena'          => 'nullable',
-            'documento'       => 'nullable',
-            'pdf'             => 'required',
-            'estado'          => 'required|boolean',
-            'series_id'       => 'nullable|exists:series,id',
-            'tipos_id'         => 'required|in:7,8,9',
-            'imagen'          => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
-            'roles'           => 'nullable|array',
-        ];
-    }
+{
+    $libroId = $this->route('libro')->id ?? null;
+
+    return [
+        'titulo' => [
+            'required',
+            'max:255',
+            Rule::unique('libros')
+                ->where(fn($query) => $query->whereNull('deleted_at'))
+                ->ignore($libroId),
+        ],
+         'slug' => [
+             
+             'max:255',
+             Rule::unique('libros')
+                 ->where(fn($query) => $query->whereNull('deleted_at'))
+                 ->ignore($libroId),
+         ],
+        'volumen'        => 'nullable|max:50',
+        'anio'           => 'nullable|digits:4|integer',
+        'resumen'        => 'nullable',
+        'cita'           => 'nullable',
+        'isbn'           => 'nullable|max:20',
+        'isbn_coleccion' => 'nullable|max:20',
+        'palabras_clave' => 'nullable',
+        'resena'         => 'nullable',
+        'documento'      => 'nullable',
+        'pdf'            => 'nullable',
+        'estado'         => 'required|boolean',
+        'series_id'      => 'nullable|exists:series,id,deleted_at,NULL',
+        'tipos_id'       => 'required|in:7,8,9',
+        'imagen'         => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
+        'roles'          => 'nullable|array',
+    ];
+}
 
     public function messages(): array
     {
