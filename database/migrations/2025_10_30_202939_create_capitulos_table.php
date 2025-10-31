@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('capitulos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('libro_id')->constrained('libros')->onDelete('cascade');
-            $table->foreignId('autor_id')->constrained('autores')->nullable();
+            $table->foreignId('autor_id')->nullable()->constrained('autores')->nullOnDelete();
+            // $table->foreignId('autor_id')->constrained('autores')->nullable(); //el autores nullable parece no estar funcionando, no lo pasa a la base de datos y la base lo pide.
+            //incorrecto arriba por el orden
             $table->string('nombre');
             $table->text('descripcion')->nullable();
             $table->text('cita_articulo')->nullable();
