@@ -26,7 +26,7 @@
         </div>
 
         {{-- Rol --}}
-<div class="mb-3">
+{{-- <div class="mb-3">
     <label for="role_id" class="form-label">Rol</label>
     <select name="role_id" id="role_id" class="form-select" required>
         <option value="">-- Selecciona un rol --</option>
@@ -39,7 +39,30 @@
     @error('role_id')
         <div class="text-danger mt-1">{{ $message }}</div>
     @enderror
+</div> --}}
+
+{{-- Rol --}}
+<div class="mb-3">
+    <label for="role_id" class="form-label">Rol</label>
+    <select name="role_id" id="role_id" class="form-select" required>
+        <option value="">-- Selecciona un rol --</option>
+
+        @foreach($roles as $role)
+            {{-- 🔒 Solo mostrar "Desarrollador" si el usuario actual tiene ese rol --}}
+            @if($role->name !== 'Desarrollador' || auth()->user()->hasRole('Desarrollador'))
+                <option value="{{ $role->name }}" 
+                    {{ old('role_id') == $role->name ? 'selected' : '' }}>
+                    {{ $role->name }}
+                </option>
+            @endif
+        @endforeach
+    </select>
+
+    @error('role_id')
+        <div class="text-danger mt-1">{{ $message }}</div>
+    @enderror
 </div>
+
 
 
         {{-- Estado --}}
@@ -70,8 +93,8 @@
         </div>
 
         {{-- Botones --}}
-        <button type="submit" class="btn btn-success">💾 Guardar</button>
-        <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">⬅️ Volver</a>
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Volver</a>
     </form>
 </div>
 @endsection

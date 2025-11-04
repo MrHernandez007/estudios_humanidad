@@ -24,7 +24,7 @@ class PublicacionUpdateRequest extends FormRequest
     return [
         'titulo' => 'required|max:255',
         'descripcion' => 'required',
-        'fecha' => 'date', //required|
+        // 'fecha' => 'date', //required|
         'imagen' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         'estado' => 'required|boolean',
         'tipo' => 'required|in:convocatoria,noticia,evento',

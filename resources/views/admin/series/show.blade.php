@@ -15,8 +15,8 @@
     </div>
 
     <div class="mt-3">
-        <a href="{{ route('admin.series.edit', $serie) }}" class="btn btn-warning">✏️ Editar</a>
-        <a href="{{ route('admin.series.index') }}" class="btn btn-secondary">⬅️ Volver</a>
+        <a href="{{ route('admin.series.edit', $serie) }}" class="btn btn-warning">Editar</a>
+        <a href="{{ route('admin.series.index') }}" class="btn btn-secondary">Volver</a>
     </div>
 </div>
 @endsection

@@ -4,6 +4,7 @@
 <div class="container mt-4">
     <h2>{{ $libro->titulo }}</h2>
 
+    <div class="card p-4">
     <p><strong>Volumen:</strong> {{ $libro->volumen }}</p>
     <p><strong>Año:</strong> {{ $libro->anio }}</p>
     <p><strong>Resumen:</strong> {{ $libro->resumen }}</p>
@@ -11,9 +12,7 @@
     <p><strong>ISBN:</strong> {{ $libro->isbn }}</p>
     <p><strong>ISBN Colección:</strong> {{ $libro->isbn_coleccion }}</p>
     <p><strong>Palabras clave:</strong> {{ $libro->palabras_clave }}</p>
-    <p><strong>Reseña:</strong> {{ $libro->resena }}</p>
-    <p><strong>Documento:</strong> {{ $libro->documento }}</p>
-    <p><strong>Documento:</strong> {{ $libro->pdf }}</p>
+    <p><strong>Documento:</strong> <a href="{{ asset('storage/' . $libro->pdf) }}" target="_blank">Ver PDF</a></p>
     <p><strong>Serie:</strong> {{ $libro->serie->nombre ?? '-' }}</p>
 
     @if($libro->imagen)
@@ -23,14 +22,23 @@
 
     <p><strong>Estado:</strong> {{ $libro->estado ? 'Activo' : 'Inactivo' }}</p>
 
-    <h4>Autores / Coordinadores / Presentadores</h4>
-    <ul>
-        @foreach($libro->autores as $a)
-            <li>{{ $a->nombre }} {{ $a->apellido }} — <em>{{ $a->pivot->rol }}</em></li>
-        @endforeach
-    </ul>
+    <h4>Autores</h4>
+    <p>
+        {{ $libro->autores->map(function($a) {
+            return $a->pivot->rol === 'autor_libro'
+                ? $a->nombre . ' ' . $a->apellido
+                : $a->nombre . ' ' . $a->apellido . ' (' . $a->pivot->rol . ')';
+        })->join(', ') ?: '-' }}
+    </p>
 
-    <a href="{{ route('admin.libros.index') }}" class="btn btn-secondary">⬅️ Volver</a>
+
+    </div>
+
+    <div class="mt-3">
+    <a href="{{ route('admin.libros.edit',$libro) }}" class="btn btn-warning">Editar</a>
+    <a href="{{ route('admin.libros.index') }}" class="btn btn-secondary">Volver</a>
+    </div>
+
 </div>
 @endsection
 

@@ -14,8 +14,8 @@
     </div>
 
     <div class="mt-3">
-        <a href="{{ route('admin.autores.edit', $autor) }}" class="btn btn-warning">✏️ Editar</a>
-        <a href="{{ route('admin.autores.index') }}" class="btn btn-secondary">⬅️ Volver</a>
+        <a href="{{ route('admin.autores.edit', $autor) }}" class="btn btn-warning">Editar</a>
+        <a href="{{ route('admin.autores.index') }}" class="btn btn-secondary">Volver</a>
     </div>
 </div>
 @endsection

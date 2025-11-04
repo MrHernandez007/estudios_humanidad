@@ -11,6 +11,6 @@
             <p><strong>Actualizado:</strong> {{ $permission->updated_at }}</p>
         </div>
     </div>
-    <a href="{{ route('admin.permissions.index') }}" class="btn btn-secondary mt-2">↩️ Volver</a>
+    <a href="{{ route('admin.permissions.index') }}" class="btn btn-secondary mt-2">Volver</a>
 </div>
 @endsection

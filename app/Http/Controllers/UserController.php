@@ -56,13 +56,6 @@ class UserController extends Controller
         return view('admin.users.show', compact('user'));
     }
 
-    public function editVIEJOSINROL(User $user)
-    {
-        $roles = Role::all()->pluck('name');
-        
-        return view('admin.users.edit', compact('user','roles'));
-    }
-
     public function edit(User $user)
     {
         // Traer los roles por nombre (no por id)
@@ -71,20 +64,6 @@ class UserController extends Controller
         return view('admin.users.edit', compact('user', 'roles'));
     }
     
-
-    public function updateVIEJOsSINROLES(UserUpdateRequest $request, User $user)
-    {
-        $data = $request->only(['name', 'email', 'role_id', 'estado']);
-
-        if ($request->filled('password')) {
-            $data['password'] = Hash::make($request->password);
-        }
-        $user->syncRoles($request->role_id); //arreglo de los nombres aca sólo da uno? borrar el rol_id del la tala de users en la base de datos ($request->role_id)
-        $user->update($data);
-
-        return redirect()->route('admin.users.index')
-            ->with('success', 'Administrador actualizado correctamente.');
-    }
 
     public function update(UserUpdateRequest $request, User $user)
     {

@@ -16,8 +16,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="descripcion" class="form-label">Descripción</label>
-            <textarea name="descripcion" id="descripcion" class="form-control">{{ old('descripcion',$capitulo->descripcion ?? '') }}</textarea>
+            <label for="descripcion" class="form-label">Descripción (sub capítulos)</label>
+            <textarea name="descripcion" id="descripcion" class="form-control" rows="10">{{ old('descripcion',$capitulo->descripcion ?? '') }}</textarea>
 
         </div>
 
@@ -35,7 +35,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="autores" class="form-label">Autores</label>
+            <label for="autores" class="form-label">Autores del capítulo</label>
             <select name="autores[]" id="autores" class="form-select" multiple>
                 @foreach($autores as $autor)
                     <option value="{{ $autor->id }}"
@@ -60,8 +60,8 @@
             </select>
         </div>
 
-        <button class="btn btn-success">💾 Guardar</button>
-        <a href="{{ route('admin.capitulos.index') }}" class="btn btn-secondary">⬅️ Volver</a>
+        <button class="btn btn-success">Guardar</button>
+        <a href="{{ route('admin.capitulos.index') }}" class="btn btn-secondary">Volver</a>
     </form>
 </div>
 @endsection

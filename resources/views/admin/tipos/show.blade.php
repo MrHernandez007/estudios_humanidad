@@ -15,8 +15,8 @@
     </div>
 
     <div class="mt-3">
-        <a href="{{ route('admin.tipos.edit', $tipo) }}" class="btn btn-warning">✏️ Editar</a>
-        <a href="{{ route('admin.tipos.index') }}" class="btn btn-secondary">⬅️ Volver</a>
+        <a href="{{ route('admin.tipos.edit', $tipo) }}" class="btn btn-warning">Editar</a>
+        <a href="{{ route('admin.tipos.index') }}" class="btn btn-secondary">Volver</a>
     </div>
 </div>
 @endsection

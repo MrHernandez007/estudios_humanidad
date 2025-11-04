@@ -23,7 +23,7 @@ class CapitulosController extends Controller
                     ->orderBy('id', 'desc') // el último añadido primero
                     ->get();
         $autores = Autor::where('estado',1)
-                    ->orderBy('id', 'desc') // el último añadido primero
+                    ->orderBy('nombre', 'asc') // alfabético
                     ->get();
 
         return view('admin.capitulos.create', compact('libros','autores'));
@@ -74,7 +74,7 @@ class CapitulosController extends Controller
                     ->get();
         
         $autores = Autor::where('estado',1)
-                    ->orderBy('id', 'desc') // el último añadido primero
+                    ->orderBy('nombre', 'asc') // alfabético
                     ->get();
         $capitulo->load('autores');
         return view('admin.capitulos.edit', compact('capitulo','libros','autores'));

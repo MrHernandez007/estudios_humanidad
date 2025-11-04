@@ -16,8 +16,8 @@
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-primary">✅ Actualizar</button>
-        <a href="{{ route('admin.roles.index') }}" class="btn btn-secondary">↩️ Volver</a>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
+        <a href="{{ route('admin.roles.index') }}" class="btn btn-secondary">Volver</a>
     </form>
 </div>
 @endsection

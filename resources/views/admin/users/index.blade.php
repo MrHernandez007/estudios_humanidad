@@ -1,13 +1,15 @@
 @extends('layouts.layout_admin')
 
 @section('contenido')
+<div class="container mt-4">
 
-    <h1>Listado de Administradores</h1><br>
+    <h2 class="mb-4">Listado de Administradores</h1><br>
 
-    <a href="{{ route('admin.users.create') }}" class="btn btn-primary mb-3">➕ Nuevo Administrador</a>
-
-    <div class="container my-4">
-    {{-- <h2 class="mb-4 text-center">Listado de Administradores</h2> --}}
+<a href="{{ route('admin.users.create') }}" 
+   class="btn btn-primary mb-3" 
+   style="background-color: #34142F; border: none; outline: none; box-shadow: none;">
+   ➕ Nuevo Administrador
+</a>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -49,25 +51,6 @@
                             {{ $user->estado ? 'Activo' : 'Inactivo' }}
                         </span>
                         </td>
-                        {{-- <td>
-                            @if($admin->rol_id == 1)
-                                <span class="badge bg-primary">Superadmin</span>
-                            @else
-                                <span class="badge bg-secondary">Admin</span>
-                            @endif
-                        </td> --}}
-                        {{-- <td>
-                            <a href="{{ route('admin.users.show', $user) }}" class="btn btn-info btn-sm">Ver</a>
-                            {{-- {{ route('administradores.show', $admin->id) }} --}
-                            <a href="{{ route('admin.users.show', $user) }}" class="btn btn-warning btn-sm">Editar</a>
-                            {{-- {{ route('administradores.edit', $admin->id) }} --}
-                            <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="d-inline">
-                                {{-- {{ route('administradores.destroy', $admin->id) }} --}
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que deseas eliminar este registro?')">Eliminar</button>
-                            </form>
-                        </td> --}}
 
                         <x-acciones-crud :model="$user" :routeName="'users'"/>
                     </tr>
@@ -84,7 +67,7 @@
 </div>
 
 
-
+</div>
 
 @endsection
 

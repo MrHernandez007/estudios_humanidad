@@ -20,12 +20,14 @@ class AutoresController extends Controller
     /**~
      * Mostrar todos los autores
      */
+   
+
     public function index()
-    {
-        $autores = Autor::latest()->paginate(10);
-        // $areP[] = ;
-        return view('admin.autores.index', compact('autores'));
-    }
+{
+    $autores = Autor::orderBy('nombre', 'asc')->paginate(10);
+    return view('admin.autores.index', compact('autores'));
+}
+
 
     /**
      * Mostrar formulario de creación
@@ -65,6 +67,7 @@ class AutoresController extends Controller
     public function show(Autor $autor)
     {
         return view('admin.autores.show', compact('autor'));
+        
     }
 
     /**

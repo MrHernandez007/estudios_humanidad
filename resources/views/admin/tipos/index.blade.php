@@ -2,14 +2,15 @@
 
 @section('contenido')
 <div class="container mt-4">
-    <h2 class="mb-4">Lista de Tipos (Colecciones, no sé si aparecerá en el nabvar final)</h2>
+    <h2 class="mb-4">Lista de Colecciones (Sólo para el desarrollador)</h2>
 
-    <a href="{{ route('admin.tipos.create') }}" class="btn btn-primary mb-3">➕ Nuevo Tipo (para posible futuro crecimiento de la página)</a>
+    <a href="{{ route('admin.tipos.create') }}" class="btn btn-primary mb-3" style="background-color: #34142F; border: none; outline: none; box-shadow: none;">➕ Nuevo Tipo</a>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
+    <div class="table-responsive shadow-sm rounded">
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
             <tr>
@@ -47,6 +48,7 @@
             @endforelse
         </tbody>
     </table>
+    </div>
 
     {{ $tipos->links('pagination::bootstrap-5') }}
 </div>

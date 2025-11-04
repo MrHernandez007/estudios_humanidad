@@ -44,23 +44,6 @@ class LibrosPublicController extends Controller
     //     return view('general.detalle', compact('libro'));
     // }
 
-    public function showsinestado($id)
-{
-    $libro = Libro::with(['autores', 'serie', 'tipo', 'capitulos.autores'])->findOrFail($id);
-
-    return view('general.detalle', compact('libro'));
-}
-
-public function shownofu($id)
-{
-    // Solo traer el libro si está activo
-    $libro = Libro::with(['autores', 'serie', 'tipo', 'capitulos.autores'])
-                  ->where('estado', 1)   // solo activos
-                  ->findOrFail($id);
-
-    return view('general.detalle', compact('libro'));
-}
-
 public function show($id)
 {
     // Cargar el libro con sus relaciones, aplicando el filtro

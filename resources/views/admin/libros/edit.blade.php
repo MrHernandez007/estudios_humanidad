@@ -117,7 +117,7 @@
             <option value="editor" {{ in_array('editor', $selectedRoles) ? 'selected' : '' }}>Editor</option>
             <option value="compilador" {{ in_array('compilador', $selectedRoles) ? 'selected' : '' }}>Compilador</option>
             <option value="presentador" {{ in_array('presentador', $selectedRoles) ? 'selected' : '' }}>Presentador</option>
-            <option value="Preface/Foreword" {{ in_array('Preface/Foreword', $selectedRoles) ? 'selected' : '' }}>Preface/Foreword</option>
+            {{-- <option value="Preface/Foreword" {{ in_array('Preface/Foreword', $selectedRoles) ? 'selected' : '' }}>Preface/Foreword</option> --}}
         </select>
 
         <button type="button" class="btn btn-danger remove-autor">❌</button>
@@ -137,7 +137,7 @@
             <option value="editor">Editor</option>
             <option value="compilador">Compilador</option>
             <option value="presentador">Presentador</option>
-            <option value="Preface/Foreword">Preface/Foreword</option>
+            {{-- <option value="Preface/Foreword">Preface/Foreword</option> --}}
         </select>
 
         <button type="button" class="btn btn-danger remove-autor">❌</button>
@@ -292,8 +292,8 @@ document.addEventListener('click', function(e){
         <button type="button" id="add-autor" class="btn btn-primary mb-3">➕ Añadir autor</button>
         🔹 Fin bloque autores --}}
 
-        <button class="btn btn-success">💾 Actualizar</button>
-        <a href="{{ route('admin.libros.index') }}" class="btn btn-secondary">⬅️ Volver</a>
+        <button class="btn btn-success">Actualizar</button>
+        <a href="{{ route('admin.libros.index') }}" class="btn btn-secondary">Volver</a>
     </form>
 </div>
 {{--  let index = {{ count($oldRoles) }}; --}}

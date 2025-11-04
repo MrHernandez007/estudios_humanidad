@@ -15,8 +15,8 @@
             @enderror
         </div>
 
-        <button type="submit" class="btn btn-success">💾 Guardar</button>
-        <a href="{{ route('admin.permissions.index') }}" class="btn btn-secondary">↩️ Volver</a>
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="{{ route('admin.permissions.index') }}" class="btn btn-secondary">Volver</a>
     </form>
 </div>
 @endsection

@@ -2,6 +2,8 @@
 @section('contenido')
 <div class="container mt-4">
     <h2>Capítulo: {{ $capitulo->nombre }}</h2>
+
+    <div class="card p-4">
     <p>Descripción: {{ $capitulo->descripcion }}</p>
     <p><strong>Libro:</strong> {{ $capitulo->libro->titulo ?? 'N/A' }}</p>
     <p><strong>Autores:</strong>
@@ -15,8 +17,11 @@
     </p>
     <p><strong>Cita:</strong> {{ $capitulo->cita_articulo }}</p>
     <p><strong>Estado:</strong> {{ $capitulo->estado ? 'Activo' : 'Inactivo' }}</p>
+    </div>
 
-    <a href="{{ route('admin.capitulos.edit',$capitulo) }}" class="btn btn-warning">✏️ Editar</a>
-    <a href="{{ route('admin.capitulos.index') }}" class="btn btn-secondary">⬅️ Volver</a>
+    <div class="mt-3">
+    <a href="{{ route('admin.capitulos.edit',$capitulo) }}" class="btn btn-warning">Editar</a>
+    <a href="{{ route('admin.capitulos.index') }}" class="btn btn-secondary">Volver</a>
+    </div>
 </div>
 @endsection

@@ -1,11 +1,11 @@
 @extends('layouts.layout_admin')
 
 @section('contenido')
-<div class="container">
+<div class="container" style="padding-top: 5rem; padding-bottom: 3rem;">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Has iniciado sesión correctamente.') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -22,9 +22,9 @@
 
 
 
-                    <p class="mt-3 text-muted">
+                    {{-- <p class="mt-3 text-muted">
                         {{ __('Has iniciado sesión correctamente.') }}
-                    </p>
+                    </p> --}}
                 </div>
             </div>
         </div>

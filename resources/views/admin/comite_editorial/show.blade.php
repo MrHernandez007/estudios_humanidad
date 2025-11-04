@@ -17,8 +17,8 @@
     </div>
 
     <div class="mt-3">
-        <a href="{{ route('admin.comite_editorial.edit', $miembro) }}" class="btn btn-warning">✏️ Editar</a>
-        <a href="{{ route('admin.comite_editorial.index') }}" class="btn btn-secondary">⬅️ Volver</a>
+        <a href="{{ route('admin.comite_editorial.edit', $miembro) }}" class="btn btn-warning">Editar</a>
+        <a href="{{ route('admin.comite_editorial.index') }}" class="btn btn-secondary">Volver</a>
     </div>
 </div>
 @endsection

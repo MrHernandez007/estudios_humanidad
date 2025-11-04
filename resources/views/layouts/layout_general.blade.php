@@ -8,81 +8,89 @@
     <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet"> <!-- Para la tipografía -->
 
 </head>
-<body>
-
-    {{-- <img src="{{ asset('imagenes/ColeccionEstudiosDeLaHumanidad.png') }}" alt="imagen_coleccion" class="img-fluid"> --}}
+<body style="background-color: #FFFFFF; min-height: 100vh; margin: 0; padding: 0;">
 
 
-    <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg" style="background-color: #EDE4CA; border-bottom: 1px solid #ddd; color: #FFFFFF; font-family: 'Michroma', sans-serif;">
 
 
-    <div class="container">
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #EDE4CA; font-family: 'Michroma', sans-serif;">
 
-        <!-- Links de navegación centrados -->
-        <div class="mx-auto"> <!-- Este div centrará el contenido -->
-            <ul class="navbar-nav d-flex flex-row">
-                <li class="nav-item px-5 border-end">
-                    <a class="nav-link {{ request()->routeIs('general.inicio') ? 'fw-bold' : '' }}" 
-                        style="color: #FFFFFF;" 
-                       href="{{ route('general.inicio') }}">
-                        <img src="{{ asset('imagenes/logos/1A_Logo_blanco_circulo_ROJO.png') }}" 
-                            alt="Logo" 
-                            width="30" 
-                            height="30" 
-                            class="d-inline-block me-2 align-text-top">
-                        Inicio
-                    </a>
-                </li>
+  <div class="container">
 
-                <li class="nav-item px-5 border-end">
-                    <a class="nav-link {{ request()->routeIs('general.coleccion') && request()->route('tipo') == 7 ? 'fw-bold' : '' }}" 
-                        style="color: #FFFFFF;" 
-                       href="{{ route('general.coleccion', 7) }}"> 
-                        Estudios de la Humanidad
-                    </a>
-                </li>
-                <li class="nav-item px-5 border-end">
-                    <a class="nav-link {{ request()->routeIs('general.coleccion') && request()->route('tipo') == 8 ? 'fw-bold' : '' }}" 
-                        style="color: #FFFFFF;" 
-                       href="{{ route('general.coleccion', 8) }}">
-                        Estudios del Hombre
-                    </a>
-                </li>
-                <li class="nav-item px-5">
-                    <a class="nav-link {{ request()->routeIs('general.coleccion') && request()->route('tipo') == 9 ? 'fw-bold' : '' }}"
-                        style="color: #FFFFFF;"  
-                       href="{{ route('general.coleccion', 9) }}">
-                        Revista Estudios del Hombre
-                    </a>
-                </li>
-            </ul>
-        </div>
+    <!-- Logo e inicio -->
+    <a class="navbar-brand d-flex align-items-center" href="{{ route('general.inicio') }}">
+      <img src="{{ asset('imagenes/logos/1A_Logo_blanco_circulo_ROJO.png') }}" 
+           alt="Logo" 
+           width="35" 
+           height="35" 
+           class="d-inline-block me-2">
+      <span style="color: #4a4a4a;">Inicio</span>
+    </a>
 
-    
+    <!-- Botón hamburguesa (móvil) -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContenido"
+      aria-controls="navbarContenido" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <!-- Contenido del navbar (colapsable) -->
+    <div class="collapse navbar-collapse justify-content-center" id="navbarContenido">
+      <ul class="navbar-nav text-center">
+        <li class="nav-item px-3">
+          <a class="nav-link {{ request()->routeIs('general.coleccion') && request()->route('tipo') == 7 ? 'fw-bold' : '' }}"
+             href="{{ route('general.coleccion', 7) }}"
+             style="color: #4a4a4a;">
+            Estudios de la Humanidad
+          </a>
+        </li>
+        <li class="nav-item px-3">
+          <a class="nav-link {{ request()->routeIs('general.coleccion') && request()->route('tipo') == 8 ? 'fw-bold' : '' }}"
+             href="{{ route('general.coleccion', 8) }}"
+             style="color: #4a4a4a;">
+            Estudios del Hombre
+          </a>
+        </li>
+        <li class="nav-item px-3">
+          <a class="nav-link {{ request()->routeIs('general.coleccion') && request()->route('tipo') == 9 ? 'fw-bold' : '' }}"
+             href="{{ route('general.coleccion', 9) }}"
+             style="color: #4a4a4a;">
+            Revista Estudios del Hombre
+          </a>
+        </li>
+      </ul>
     </div>
+
+  </div>
 </nav>
+<!-- {{-- HERO con logo a lo largo de la pantalla --}} -->
+{{-- <section class="w-100" style="background-color: transparent; padding: 0; margin: 0;">
+    <div class="container-fluid p-0 m-0">
+        <img src="{{ asset('imagenes/logos/1_LOGO_PRINCIPAL_con_titulo_ROJO.jpg') }}" 
+             alt="Logo Estudios de la Humanidad" 
+             class="img-fluid w-100" 
+             style="height: 50px; object-fit: contain; display: block;">
+    </div>
+</section> --}}
 
 
 
     <!-- CONTENIDO -->
-    <div style="background-color: #FFFFFF; font-family: 'Michroma', sans-serif;">  <!-- Color del Fondo y tipografía -->
-
-    {{-- <div class="container my-5"> --}}
+    <div style="background-color: #FFFFFF; font-family: 'Michroma', sans-serif; padding-bottom: 50px;">  <!-- Color del Fondo y tipografía -->
         @yield('contenido')
     </div> 
 
-    <!-- FOOTER -->
-    <footer style="background-color: #EDE4CA; color: #FFFFFF; font-family: 'Michroma', sans-serif;">
+   <!-- FOOTER -->
+<footer style="background-color: #EDE4CA; font-family: 'Michroma', sans-serif; color: #4a4a4a; margin-top: 50px;">
 
-    <div class="container">
+    <div class="container py-4">
         <div class="row text-center text-md-start justify-content-center">
+
             <!-- Dirección -->
             <div class="col-md-4 mb-4">
                 <i class="bi bi-geo-alt-fill fs-4"></i>
-                <h6 class="mt-2">Dirección</h6>
-                <p class="small">
+                <h6 class="mt-2 fw-semibold">Dirección</h6>
+                <p class="small mb-0">
                     Estudios Mesoamericanos y Mexicanos Ave. Parres Arias Núm. 150<br>
                     Esquina con periférico norte<br>
                     Colonia San José del Bajío, C.P. 45132<br>
@@ -94,36 +102,40 @@
             <!-- Teléfono -->
             <div class="col-md-4 mb-4">
                 <i class="bi bi-telephone-fill fs-4"></i>
-                <h6 class="mt-2">Teléfono</h6>
-                <p class="small">(33) 3819-3365, Ext. 23365</p>
+                <h6 class="mt-2 fw-semibold">Teléfono</h6>
+                <p class="small mb-0">(33) 3819-3365, Ext. 23365</p>
             </div>
 
-            <!-- Correo -->
+            <!-- Correo y login -->
             <div class="col-md-4 mb-4">
                 <i class="bi bi-envelope-fill fs-4"></i>
-                <h6 class="mt-2">Correo</h6>
-                <p class="small">edh.cucsh@academicos.udg.mx</p>
-
+                <h6 class="mt-2 fw-semibold">Correo</h6>
+                <p class="small mb-2">edh.cucsh@academicos.udg.mx</p>
 
                 <!-- Login a la derecha -->
-        <ul class="navbar-nav ms-auto">
-            @guest
-                <li class="nav-item">
-                    <a class="nav-link text-muted" href="{{ route('login') }}">Login</a>
-                </li>
-            @endguest
-        </ul>
+                <ul class="navbar-nav ms-auto">
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link p-0 small" href="{{ route('login') }}" style="color: #4a4a4a;">Login</a>
+                        </li>
+                    @endguest
+                </ul>
             </div>
 
-         
         </div>
 
-        <div class="text-center py-3 border-top small">
+        <!-- Línea de copyright -->
+        <div class="text-center py-3 border-top" style="border-color: #4a4a4a;">
             &copy; 2025 Estudios Humanidad
         </div>
     </div>
 </footer>
 
 
+
 </body>
 </html>
+
+
+
+

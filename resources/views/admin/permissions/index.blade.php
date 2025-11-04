@@ -1,10 +1,12 @@
 @extends('layouts.layout_admin')
 @section('contenido')
 <div class="container mt-4">
-    <h2>Permisos (Seguramente esto no se verá en el navbar final)</h2>
-    <a href="{{ route('admin.permissions.create') }}" class="btn btn-primary mb-3">➕ Nuevo Permiso (para posible futuro crecimiento de la página, ahora se crean automaticamente en el backend en "RoleController")</a>
-    <table class="table table-bordered">
-        <thead>
+    <h2>Permisos (Sólo para el desarrollador)</h2>
+    <a href="{{ route('admin.permissions.create') }}" class="btn btn-primary mb-3" style="background-color: #34142F; border: none; outline: none; box-shadow: none;">➕ Nuevo Permiso</a>
+
+    <div class="table-responsive shadow-sm rounded">
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
@@ -32,6 +34,7 @@
             @endforeach
         </tbody>
     </table>
+    </div>
         {{ $permissions->links('pagination::bootstrap-5') }}
 
 </div>

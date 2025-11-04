@@ -20,18 +20,41 @@
 
         <div class="mb-3">
             <label for="fecha" class="form-label">Fecha</label>
-            <input type="date" name="fecha" id="fecha" class="form-control" value="{{ $publicacione->fecha }}" required>
+            
+            @if($publicacione->fecha)
+                <!-- Checkbox para eliminar -->
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" name="eliminar_fecha" id="eliminar_fecha" value="1">
+                    <label class="form-check-label" for="eliminar_fecha">
+                        Eliminar fecha actual
+                    </label>
+                </div>
+            @endif
+
+            <input type="date" name="fecha" id="fecha" class="form-control" value="{{ $publicacione->fecha }}">
         </div>
+
+
 
         <div class="mb-3">
             <label for="imagen" class="form-label">Imagen</label>
+            
             @if($publicacione->imagen)
                 <div class="mb-2">
                     <img src="{{ asset('storage/'.$publicacione->imagen) }}" width="100">
                 </div>
+                <!-- Checkbox para eliminar -->
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" name="eliminar_imagen" id="eliminar_imagen" value="1">
+                    <label class="form-check-label" for="eliminar_imagen">
+                        Eliminar imagen actual
+                    </label>
+                </div>
             @endif
+
             <input type="file" name="imagen" id="imagen" class="form-control">
         </div>
+
 
         <div class="mb-3">
             <label for="estado" class="form-label">Estado</label>
@@ -50,8 +73,10 @@
             </select>
         </div>
 
-        <button class="btn btn-success">💾 Actualizar</button>
-        <a href="{{ route('admin.publicaciones.index') }}" class="btn btn-secondary">⬅️ Volver</a>
+        <button class="btn btn-success">Actualizar</button>
+        <a href="{{ route('admin.publicaciones.index') }}" class="btn btn-secondary">Volver</a>
     </form>
 </div>
 @endsection
+
+

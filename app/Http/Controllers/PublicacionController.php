@@ -80,31 +80,46 @@ class PublicacionController extends Controller
     /**
      * Actualizar una publicación.
      */
-    public function update(PublicacionUpdateRequest $request, Publicacion $publicacione)
-    {
-        $data = $request->validated();
 
-        // Carpeta según tipo
-        $tipoCarpeta = match($data['tipo'] ?? null) {
-            'convocatoria' => 'convocatoria',
-            'evento' => 'evento',
-            'noticia' => 'noticia',
-            default => 'otros',
-        };
 
-        // Manejo de imagen (reemplazo si se sube nueva)
-        if ($request->hasFile('imagen')) {
-            if ($publicacione->imagen && Storage::disk('public')->exists($publicacione->imagen)) {
-                Storage::disk('public')->delete($publicacione->imagen);
-            }
-            $data['imagen'] = $request->file('imagen')->store("publicaciones/$tipoCarpeta", 'public');
-        }
 
-        $publicacione->update($data);
+public function update(PublicacionUpdateRequest $request, Publicacion $publicacione)
+{
+    $data = $request->validated();
 
-        return redirect()->route('admin.publicaciones.index')
-            ->with('success', 'Publicación actualizada correctamente.');
+    // Carpeta según tipo
+    $tipoCarpeta = match($data['tipo'] ?? null) {
+        'convocatoria' => 'convocatoria',
+        'evento' => 'evento',
+        'noticia' => 'noticia',
+        default => 'otros',
+    };
+
+    // Borrar imagen si marcó eliminar
+    if ($request->has('eliminar_imagen') && $publicacione->imagen && Storage::disk('public')->exists($publicacione->imagen)) {
+        Storage::disk('public')->delete($publicacione->imagen);
+        $data['imagen'] = null;
     }
+
+    // Borrar fecha si marcó eliminar
+    if ($request->has('eliminar_fecha')) {
+        $data['fecha'] = null;
+    }
+
+    // Manejo de imagen (reemplazo si se sube nueva)
+    if ($request->hasFile('imagen')) {
+        if ($publicacione->imagen && Storage::disk('public')->exists($publicacione->imagen)) {
+            Storage::disk('public')->delete($publicacione->imagen);
+        }
+        $data['imagen'] = $request->file('imagen')->store("publicaciones/$tipoCarpeta", 'public');
+    }
+
+    $publicacione->update($data);
+
+    return redirect()->route('admin.publicaciones.index')
+        ->with('success', 'Publicación actualizada correctamente.');
+}
+
 
     /**
      * Eliminar (soft delete) una publicación.

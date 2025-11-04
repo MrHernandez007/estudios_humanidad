@@ -4,12 +4,13 @@
 <div class="container mt-4">
     <h2 class="mb-4">Lista de Libros</h2>
 
-    <a href="{{ route('admin.libros.create') }}" class="btn btn-primary mb-3">➕ Nuevo Libro</a>
+    <a href="{{ route('admin.libros.create') }}" class="btn btn-primary mb-3" style="background-color: #34142F; border: none; outline: none; box-shadow: none;">➕ Nuevo Libro</a>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
+    <div class="table-responsive shadow-sm rounded">
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
             <tr>
@@ -53,6 +54,7 @@
             @endforelse
         </tbody>
     </table>
+    </div>
 
     {{ $libros->links('pagination::bootstrap-5') }}
 </div>

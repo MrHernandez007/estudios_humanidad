@@ -36,8 +36,8 @@
             </select>
         </div>
 
-        <button class="btn btn-success">💾 Actualizar</button>
-        <a href="{{ route('admin.comite_editorial.index') }}" class="btn btn-secondary">⬅️ Volver</a>
+        <button class="btn btn-success">Actualizar</button>
+        <a href="{{ route('admin.comite_editorial.index') }}" class="btn btn-secondary">Volver</a>
     </form>
 </div>
 @endsection

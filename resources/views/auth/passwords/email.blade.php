@@ -1,7 +1,7 @@
 @extends('layouts.layout_general')
 
 @section('contenido')
-<div class="container">
+<div class="container" style="padding-top: 6rem; padding-bottom: 6rem;">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

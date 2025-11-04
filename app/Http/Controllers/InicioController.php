@@ -15,7 +15,7 @@ class InicioController extends Controller
         // Últimas 3 publicaciones activas para el carrusel (todas o solo convocatorias)
         $publicaciones = Publicacion::where('estado', 1)
             ->latest('fecha')
-            ->take(3)
+            // ->take(3)
             ->get();
 
         return view('general.inicio', compact('comite', 'publicaciones'));

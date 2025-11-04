@@ -8,19 +8,25 @@
         <a href="{{ route("admin.{$routeName}.show", $model) }}" class="btn btn-info btn-sm">Ver</a>
 
         {{-- Editar: solo admin o superadmin --}}
-        @if(auth()->user()->hasRole(['admin', 'SuperAdmin']))
+        @if(auth()->user()->hasRole(['SuperAdmin', 'Desarrollador']))
             <a href="{{ route("admin.{$routeName}.edit", $model) }}" class="btn btn-warning btn-sm">Editar</a>
         @endif
         
-        {{-- Editar permisos: solo SuperAdmin y en la ruta de roles --}}
-        @if(auth()->user()->hasRole('SuperAdmin') && Route::is('admin.roles.index'))
+        {{-- Editar permisos: solo SuperAdmin y Desarrollador en la ruta de roles --}}
+        {{-- @if(auth()->user()->hasRole('SuperAdmin') && Route::is('admin.roles.index'))
+            <a href="{{ route("admin.roles.editPermissions", $model) }}" class="btn btn-primary">Permisos</a>
+        @endif --}}
+
+        {{-- Editar permisos: solo SuperAdmin o Desarrollador, y solo en la ruta de roles --}}
+        @if(auth()->user()->hasAnyRole('Desarrollador') && Route::is('admin.roles.index'))
             <a href="{{ route("admin.roles.editPermissions", $model) }}" class="btn btn-primary">Permisos</a>
         @endif
 
 
 
+
         {{-- Eliminar: solo superadmin --}}
-        @if(auth()->user()->hasRole('SuperAdmin'))
+        @if(auth()->user()->hasRole(['SuperAdmin', 'Desarrollador']))
             <form action="{{ route("admin.{$routeName}.destroy", $model) }}" method="POST" class="d-inline">
                 @csrf
                 @method('DELETE')
