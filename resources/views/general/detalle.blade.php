@@ -1,6 +1,8 @@
 @extends('layouts.layout_general')
 
 @section('contenido')
+<div style="font-family: 'Cambria', sans-serif;">
+
 
 
 <div class="container my-5">
@@ -16,6 +18,7 @@
              style="max-height: 450px; object-fit: cover; border-color:#F2B81B;">
     </div>
 
+
     {{-- Información general --}}
     <div class="card shadow-sm mb-5 border-0" style="background-color:#F9F9F9;">
         <div class="card-body p-4">
@@ -25,9 +28,10 @@
             @php
                 $roles = [
                     'autor_libro' => 'Autor', 
-                    'coordinador' => 'Coordinador', 
+                    'coordinador' => 'Coordinador',
+                    'editor' => 'Editor', 
                     'presentador' => 'Presentador', 
-                    'Preface/Foreword' => 'Preface/Foreword'
+                    'compilador' => 'Compilador'
                 ];
             @endphp
 
@@ -49,7 +53,7 @@
             <p><strong>Volumen:</strong> <span style="color:#34142F;">{{ $libro->volumen }}</span></p>
             <p><strong>Año:</strong> <span style="color:#34142F;">{{ $libro->anio }}</span></p>
 
-            <p><strong>Resumen:</strong> <span style="color:#7689A5;">{!! nl2br(e($libro->resumen)) !!}</span></p>
+            <p><strong>Resumen:</strong> <span style="color:#7689A5; text-align: justify; display: block;">{!! nl2br(e($libro->resumen)) !!}</span></p>
 
             @if(!empty($libro->palabras_clave))
                 <p><strong>Palabras clave:</strong> <span style="color:#34142F;">{{ $libro->palabras_clave }}</span></p>
@@ -59,6 +63,10 @@
 
             @if(!empty($libro->isbn_coleccion))
                 <p><strong>ISBN colección:</strong> <span style="color:#34142F;">{{ $libro->isbn_coleccion }}</span></p>
+            @endif
+
+            @if(!empty($libro->cita))
+                <p><strong>¿Cómo citar?:</strong> <span style="color:#34142F;">{{ $libro->cita }}</span></p>
             @endif
 
             @if($libro->pdf)
@@ -75,21 +83,32 @@
     </div>
 
     {{-- Capítulos --}}
-    <h3 class="mb-4 fw-bold text-center" style="color:#34142F;">Capítulos</h3>
+    {{-- <h3 class="mb-4 fw-bold text-center" style="color:#34142F;">Contenido del libro</h3> --}}
 
-    @foreach($libro->capitulos as $index => $capitulo)
-        <div class="card mb-4 shadow-sm border-0">
+    <div class="card mb-4 shadow-sm border-0">
             <div class="card-body">
-                <h5 class="card-title fw-bold" style="color:#E44942;">{{ $capitulo->nombre }}</h5>
+                <h4 class="card-title mb-4 fw-bold" style="color:#E44942;">Contenido del libro</h4>
+    @foreach($libro->capitulos as $index => $capitulo)
+        
+                <h5 class="card-title fw-bold" style="color:#E44942;">{{ $capitulo->nombre }}</h5> <br>
 
                 @if($capitulo->autores->isNotEmpty())
                     <p><strong>Autor(es):</strong> 
                     <span style="color:#34142F;">{{ $capitulo->autores->map(fn($a) => $a->nombre . ' ' . $a->apellido)->join(', ') }}</span></p>
                 @endif
 
-                <p class="mb-3 text-muted">
-                    {!! nl2br(e($capitulo->descripcion)) !!}
-                </p>
+                @php
+                    $lineas = explode("\n", $capitulo->descripcion);
+                @endphp
+
+                @foreach($lineas as $linea)
+                    @if(trim($linea) !== '')
+                        <p class="text-muted" style="text-indent: 2em; text-align: justify; line-height: 1.7;">
+                            {{ $linea }}
+                        </p>
+                    @endif
+                @endforeach
+
 
                 {{-- Cita del capítulo con collapse --}}
                 @if($capitulo->cita_articulo)
@@ -113,9 +132,10 @@
                         </div>
                     </div>
                 @endif
-            </div>
-        </div>
+            
     @endforeach
+    </div>
+        </div>
 </div>
 
 <script>
@@ -130,4 +150,5 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+</div>
 @endsection

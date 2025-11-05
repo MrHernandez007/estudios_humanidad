@@ -55,7 +55,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="cita" class="form-label">Cita</label>
+            <label for="cita" class="form-label">¿Cómo citar?</label>
             <textarea name="cita" id="cita" class="form-control">{{ $libro->cita }}</textarea>
         </div>
 
@@ -174,38 +174,6 @@ document.addEventListener('click', function(e){
 </script>
 
 
-        {{-- Tipo
-        <div class="mb-3">
-            <label for="tipo" class="form-label">Tipo</label>
-            <select name="tipos_id" id="tipo" class="form-select">
-                <option value="">-- Seleccione tipo --</option>
-                @foreach($tipos as $tipo)
-                    <option value="{{ $tipo->id }}" {{ $libro->tipos_id == $tipo->id ? 'selected' : '' }}>
-                        {{ $tipo->nombre }}
-                    </option>
-                @endforeach
-            </select>
-
-
-        </div> --}}
-
-        {{-- PDF --}}
-        {{-- <div class="mb-3">
-            <label for="pdf" class="form-label">Imagen</label>
-            @if($libro->pdf)
-                <div class="mb-2">
-                    <img src="{{ asset('storage/'.$libro->pdf) }}" alt="{{ $libro->titulo }}" width="120">
-                </div>
-            @endif
-            <input type="file" name="pdf" id="pdf" class="form-control">
-        </div> --}}
-
-        {{-- <div class="mb-3">
-            <label for="pdf" class="form-label">PDF</label>
-            <input type="file" name="pdf" id="pdf" class="form-control">{{ $libro->pdf }}</input> 
-        </div> --}}
-
-
         <div class="mb-3">
             <label for="pdf" class="form-label">Archivo PDF</label>
             <input type="file" name="pdf" id="pdf" class="form-control" accept="application/pdf">
@@ -237,60 +205,6 @@ document.addEventListener('click', function(e){
                 <option value="0" {{ !$libro->estado ? 'selected' : '' }}>Inactivo</option>
             </select>
         </div>
-
-        {{-- 🔹 Bloque dinámico de autores/roles --}}
-        {{-- <div id="autores-wrapper">
-            @php
-                $oldRoles = old('roles', $libro->autores->map(function($a){
-                    return ['autor_id'=>$a->pivot->autor_id,'roles'=>[$a->pivot->rol]];
-                })->toArray());
-            @endphp
-
-            @foreach($oldRoles as $i => $r)
-            <div class="autor-rol mb-2 d-flex align-items-center">
-                <select name="roles[{{ $i }}][autor_id]" class="form-select me-2">
-                    <option value="">-- Seleccione autor --</option>
-                    @foreach($autores as $autor)
-                        <option value="{{ $autor->id }}" {{ $r['autor_id']==$autor->id ? 'selected' : '' }}>
-                            {{ $autor->nombre }} {{ $autor->apellido }}
-                        </option>
-                    @endforeach
-                </select>
-
-                <select name="roles[{{ $i }}][roles][]" class="form-select me-2" multiple>
-                    @foreach(['autor_libro','coordinador','presentador','Preface/Foreword'] as $rol)
-                        <option value="{{ $rol }}" {{ in_array($rol,$r['roles']) ? 'selected' : '' }}>{{ $rol }}</option>
-                    @endforeach
-                </select>
-
-                <button type="button" class="btn btn-danger remove-autor">❌</button>
-            </div>
-            @endforeach
-        </div>
-
-        {{-- Bloque oculto para clonación --}
-        <div id="autor-template" class="d-none">
-            <div class="autor-rol mb-2 d-flex align-items-center">
-                <select name="roles[0][autor_id]" class="form-select me-2">
-                    <option value="">-- Seleccione autor --</option>
-                    @foreach($autores as $autor)
-                        <option value="{{ $autor->id }}">{{ $autor->nombre }} {{ $autor->apellido }}</option>
-                    @endforeach
-                </select>
-
-                <select name="roles[0][roles][]" class="form-select me-2" multiple>
-                    <option value="autor_libro">Autor</option>
-                    <option value="coordinador">Coordinador</option>
-                    <option value="presentador">Presentador</option>
-                    <option value="Preface/Foreword">Preface/Foreword</option>
-                </select>
-
-                <button type="button" class="btn btn-danger remove-autor">❌</button>
-            </div>
-        </div>
-
-        <button type="button" id="add-autor" class="btn btn-primary mb-3">➕ Añadir autor</button>
-        🔹 Fin bloque autores --}}
 
         <button class="btn btn-success">Actualizar</button>
         <a href="{{ route('admin.libros.index') }}" class="btn btn-secondary">Volver</a>

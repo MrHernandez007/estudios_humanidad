@@ -1,6 +1,7 @@
 @extends('layouts.layout_general')
 
 @section('contenido')
+<div style="font-family: 'Cambria', sans-serif;">
 
 <h1 class="text-center fw-bold mt-5 mb-5">{{ $tipoSeleccionado->nombre }}</h1>
 
@@ -50,8 +51,8 @@
 
                             {{-- Cita --}}
                             <p class="mb-3" style="font-size: 1rem;">
-                                <strong>¿Cómo citar?</strong><br>
-                                {{ $libro->cita ?? '-' }}
+                                <strong>Año</strong><br>
+                                {{ $libro->anio ?? '-' }}
                             </p>
 
                             {{-- Serie --}}
@@ -99,5 +100,5 @@
     background-color: #e05f00 !important;
 }
 </style>
-
+</div>
 @endsection

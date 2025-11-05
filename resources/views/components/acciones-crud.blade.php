@@ -8,7 +8,7 @@
         <a href="{{ route("admin.{$routeName}.show", $model) }}" class="btn btn-info btn-sm">Ver</a>
 
         {{-- Editar: solo admin o superadmin --}}
-        @if(auth()->user()->hasRole(['SuperAdmin', 'Desarrollador']))
+        @if(auth()->user()->hasRole(['SuperAdmin', 'Desarrollador','admin']))
             <a href="{{ route("admin.{$routeName}.edit", $model) }}" class="btn btn-warning btn-sm">Editar</a>
         @endif
         

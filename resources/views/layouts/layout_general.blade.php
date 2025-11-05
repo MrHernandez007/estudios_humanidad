@@ -83,7 +83,15 @@
    <!-- FOOTER -->
 <footer style="background-color: #EDE4CA; font-family: 'Michroma', sans-serif; color: #4a4a4a; margin-top: 50px;">
 
-    <div class="container py-4">
+    <div class="container py-4 text-center">
+
+        <!-- Logo principal horizontal -->
+        <div class="mb-4">
+            <img src="{{ asset('imagenes/logos/1_LOGO_PRINCIPAL_con_titulo_ROJO.png') }}" 
+                 alt="Logo principal Estudios Humanidad"
+                 style="max-width: 300px; height: auto;">
+        </div>
+
         <div class="row text-center text-md-start justify-content-center">
 
             <!-- Dirección -->
@@ -104,15 +112,19 @@
                 <i class="bi bi-telephone-fill fs-4"></i>
                 <h6 class="mt-2 fw-semibold">Teléfono</h6>
                 <p class="small mb-0">(33) 3819-3365, Ext. 23365</p>
+
+                <i class="bi bi-envelope-fill fs-4"></i>
+                <h6 class="mt-2 fw-semibold">Correo</h6>
+                <p class="small mb-2">edh.cucsh@academicos.udg.mx</p>
             </div>
 
             <!-- Correo y login -->
             <div class="col-md-4 mb-4">
-                <i class="bi bi-envelope-fill fs-4"></i>
+                {{-- <i class="bi bi-envelope-fill fs-4"></i>
                 <h6 class="mt-2 fw-semibold">Correo</h6>
-                <p class="small mb-2">edh.cucsh@academicos.udg.mx</p>
+                <p class="small mb-2">edh.cucsh@academicos.udg.mx</p> --}}
 
-                <!-- Login a la derecha -->
+                <!-- Login -->
                 <ul class="navbar-nav ms-auto">
                     @guest
                         <li class="nav-item">
@@ -120,16 +132,56 @@
                         </li>
                     @endguest
                 </ul>
+                <!-- Logo pequeño cuadrado -->
+            <img src="{{ asset('imagenes/logos/1A_Logo_blanco_circulo_ROJO.png') }}" 
+                 alt="Logo circular Estudios Humanidad"
+                 style="width: 40px; height: 40px; margin-top: 15px;">
             </div>
 
         </div>
 
         <!-- Línea de copyright -->
-        <div class="text-center py-3 border-top" style="border-color: #4a4a4a;">
-            &copy; 2025 Estudios Humanidad
+        <div class="d-flex flex-column flex-md-row justify-content-center align-items-center border-top pt-3" style="border-color: #4a4a4a;">
+            <small>&copy; 2025 Estudios de la Humanidad</small>
         </div>
     </div>
 </footer>
+
+
+<!-- ESTILO ANIMADO -->
+<style>
+  .nav-link {
+    position: relative;
+    color: #4a4a4a !important;
+    transition: color 0.3s ease;
+  }
+
+  /* Línea animada */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: #E44942; /* color del subrayado */
+    transition: width 0.3s ease;
+  }
+
+  /* Al pasar el mouse */
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* Página activa */
+  .nav-link.active::after {
+    width: 100%;
+  }
+
+  .nav-link.active {
+    font-weight: bold;
+  }
+</style>
 
 
 

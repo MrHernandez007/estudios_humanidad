@@ -49,7 +49,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="cita" class="form-label">Cita</label>
+            <label for="cita" class="form-label">¿Cómo citar?</label>
             <textarea name="cita" id="cita" class="form-control">{{ old('cita') }}</textarea>
         </div>
 

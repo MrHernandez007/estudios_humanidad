@@ -32,7 +32,7 @@
 
         
         <div class="col-md-6 d-flex flex-column justify-content-start">
-            <p class="text-muted">{!! nl2br(e($publicacion->descripcion)) !!}</p>
+            <p class="text-muted" style="text-align: justify;">{!! nl2br(e($publicacion->descripcion)) !!}</p>
         </div>
 
         @if($publicacion->imagen)
