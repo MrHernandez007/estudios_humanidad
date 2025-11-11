@@ -7,6 +7,8 @@
     {{-- @vite(['resources/js/app.js']) --}}
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
         <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet"> <!-- Para la tipografía -->
+        <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('imagenes/logos/2A_Logo_blanco_circulo_MORADO.png') }}">
 
 
 </head>

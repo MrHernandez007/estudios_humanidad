@@ -6,6 +6,9 @@
     <title>@yield('title', 'Estudios Humanidad')</title>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet"> <!-- Para la tipografía -->
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('imagenes/logos/1A_Logo_blanco_circulo_ROJO.png') }}">
+
 
 </head>
 <body style="background-color: #FFFFFF; min-height: 100vh; margin: 0; padding: 0;">

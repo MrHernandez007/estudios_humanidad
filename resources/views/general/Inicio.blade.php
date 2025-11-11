@@ -26,7 +26,6 @@
             <div class="col-md-6 text-white text-md-start text-center">
                 <h5 class="fst-italic">{{ ucfirst($pub->tipo) }}</h5>
                 <h2 class="fw-bold">{{ $pub->titulo }}</h2>
-                {{-- <small class="d-block mb-3">{{ \Carbon\Carbon::parse($pub->fecha)->format('d M, Y') }}</small> --}}
                 @if($pub->fecha)
                   <small class="d-block mb-3">
                       {{ \Carbon\Carbon::parse($pub->fecha)->locale('es')->translatedFormat('d M, Y') }}
@@ -37,7 +36,7 @@
 
                 <a href="{{ route('general.publicacion.detalle', $pub->id) }}" 
                 class="btn mt-2 px-4 py-2 fw-semibold" 
-                style="background-color:#F2B81B; color:#34142F; border:none;">
+                style="background-color:#FFFFFF; color:#34142F; border:none;">
                 Detalles
                 </a>
             </div>
@@ -68,6 +67,82 @@
     <span class="visually-hidden">Siguiente</span>
   </button>
 </div>
+
+    {{--==================== Seccion de recuadros =================--}}
+
+
+<section class="py-5 text-center" style="background-color:#f8f5ec;">
+  <div class="container">
+    {{-- <h2 class="fw-bold mb-5" style="color:#34142F;">Nuestros Logros</h2> --}}
+
+    <div class="row justify-content-center gy-4">
+      <!-- 1 -->
+      <div class="col-6 col-md-3">
+        <div class="p-4 rounded-4 shadow-sm" style="background-color:#F2B81B;">
+          <p class="text-white mb-0">Más de</p>
+          <h1 class="fw-bold mb-2 text-white counter" data-target="30">0</h1>
+          <p class="text-white mb-0">Años de trayectoria</p>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="col-6 col-md-3">
+        <div class="p-4 rounded-4 shadow-sm" style="background-color:#8291AB;">
+          <p class="text-white mb-0">Más de</p>
+          <h1 class="fw-bold mb-2 text-white counter" data-target="43">0</h1>
+          <p class="text-white mb-0">Volúmenes</p>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="col-6 col-md-3">
+        <div class="p-4 rounded-4 shadow-sm" style="background-color:#34142F;">
+          <p class="text-white mb-0">Más de</p>
+          <h1 class="fw-bold mb-2 text-white counter" data-target="400">0</h1>
+          <p class="text-white mb-0">Autores</p>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="col-6 col-md-3">
+        <div class="p-4 rounded-4 shadow-sm" style="background-color:#E44942;">
+          <h1 class="fw-bold mb-2 text-white counter" data-target="24">0</h1>
+          <p class="text-white mb-0">Investigadores del comité editorial</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // --- Animación de los contadores ---
+  const counters = document.querySelectorAll('.counter');
+  const speed = 150; // más bajo = más rápido
+
+  const animateCounters = () => {
+    counters.forEach(counter => {
+      const updateCount = () => {
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
+        const increment = target / speed;
+
+        if (count < target) {
+          counter.innerText = Math.ceil(count + increment);
+          setTimeout(updateCount, 20);
+        } else {
+          counter.innerText = target;
+        }
+      };
+      updateCount();
+    });
+  };
+
+  // Ejecuta la animación al cargar la página
+  window.addEventListener('load', animateCounters);
+</script>
+
+
+
 
 
 
@@ -127,33 +202,94 @@
 
 <hr style="width: 150px; border: 2px solid #F2B81B; margin: 2rem auto; opacity: 1; border-radius: 2px;">
 
-{{-- <section class="container my-5">
-  <div class="row justify-content-center">
-    <div class="col-lg-10">
-      <div class="p-4 rounded-4 shadow-sm" style="border-left: 6px solid #34142F; background-color: #fdfbf9;">
-        <h2 class="fw-bold mb-3" style="color:#34142F;">Presentación</h2>
-        <p class="text-muted" style="text-align: justify; line-height: 1.8;">
-          Las temáticas abordadas en las publicaciones de la Colección <strong>Estudios de la Humanidad</strong> buscan aportar conocimientos sobre el ser humano y su incidencia en el mundo desde una perspectiva humanística y de las ciencias sociales, sin limitación de marco temporal y espacial. Se trata de textos que examinan, desde enfoques teóricos y metodológicos diversos y transdisciplinarios, los fenómenos de las diversas expresiones de la cultura material y simbólica de la Humanidad; se abordan también aspectos de la sociedad, de la historia, la etnohistoria y la etnografía del Occidente de México, de sus agentes individuales y colectivos, y sus movimientos sociales.
-        </p>
-      </div>
-    </div>
+
+
+<!-- Sección de Contadores a Pantalla Completa -->
+<section class="d-flex flex-wrap position-relative text-center" style="height:100vh; background-color:#f8f5ec;">
+
+  <!-- Líneas divisorias -->
+  <div style="position:absolute; top:50%; left:0; width:100%; height:2px;  transform:translateY(-50%); z-index:1;"></div>
+  <div style="position:absolute; left:50%; top:0; width:2px; height:100%;  transform:translateX(-50%); z-index:1;"></div>
+
+  <!-- Cuadro 1 -->
+  <div class="col-6 d-flex flex-column justify-content-center align-items-center p-4 quadrant" style="background-color:#FFFFFF;">
+    <p class="fs-4 mb-0" style="color:#E44942;">Más de</p>
+    <h1 class="fw-bold counter" data-target="30" style="font-size:5rem; color:#E44942;">0</h1>
+    <p class="fs-4 mb-0" style="color:#E44942;">Años de trayectoria</p>
   </div>
-</section> --}}
+
+  <!-- Cuadro 2 -->
+  <div class="col-6 d-flex flex-column justify-content-center align-items-center p-4 quadrant" style="background-color:#FFFFFF;">
+    <p class="fs-4 mb-0" style="color:#7689A5;">Más de</p>
+    <h1 class="fw-bold counter" data-target="40" style="font-size:5rem; color:#7689A5;">0</h1>
+    <p class="fs-4 mb-0" style="color:#7689A5;">Volúmenes</p>
+  </div>
+
+  <!-- Cuadro 3 -->
+  <div class="col-6 d-flex flex-column justify-content-center align-items-center p-4 quadrant" style="background-color:#FFFFFF;">
+        <p class="fs-4 mb-0" style="color:#F2B81B;">Más de</p>
+    <h1 class="fw-bold counter" data-target="400" style="font-size:5rem; color:#F2B81B;">0</h1>
+    <p class="fs-4 mb-0" style="color:#F2B81B;">Autores</p>
+  </div>
+
+  <!-- Cuadro 4 -->
+  <div class="col-6 d-flex flex-column justify-content-center align-items-center p-4 quadrant" style="background-color:#FFFFFF;">
+    <h1 class="fw-bold counter" data-target="24" style="font-size:5rem; color:#34142F;">0</h1>
+    <p class="fs-4 mb-0" style="color:#34142F;">Investigadores del comité editorial de distintos países</p>
+  </div>
+</section>
+
+<script>
+  // --- Animación de contadores ---
+  const counters = document.querySelectorAll('.counter');
+  const speed = 150;
+
+  const animateCounters = () => {
+    counters.forEach(counter => {
+      const updateCount = () => {
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
+        const increment = target / speed;
+
+        if (count < target) {
+          counter.innerText = Math.ceil(count + increment);
+          setTimeout(updateCount, 20);
+        } else {
+          counter.innerText = target;
+        }
+      };
+      updateCount();
+    });
+  };
+
+  // Detecta cuando entra a la vista
+  const section = document.querySelector('section.d-flex.flex-wrap');
+  let started = false;
+  window.addEventListener('scroll', () => {
+    const sectionTop = section.offsetTop - window.innerHeight + 100;
+    if (!started && window.scrollY > sectionTop) {
+      animateCounters();
+      started = true;
+    }
+  });
+</script>
+
 
 <section class="py-5" style="background: linear-gradient(180deg, #EDE4CA, #FFFFFF);">
   <div class="container">
     <div class="row justify-content-center text-center">
       <div class="col-lg-9">
-        <div class="p-5 rounded-4 shadow-sm bg-white">
+        {{-- <div class="p-5 rounded-4 shadow-sm bg-white"> --}}
           <h2 class="fw-bold mb-4" style="color:#34142F;">Presentación</h2>
           <p class="text-muted" style="text-align: justify; line-height: 1.8;">
             Las temáticas abordadas en las publicaciones de la Colección <strong>Estudios de la Humanidad</strong> buscan aportar conocimientos sobre el ser humano y su incidencia en el mundo desde una perspectiva humanística y de las ciencias sociales, sin limitación de marco temporal y espacial. <br> <br>Se trata de textos que examinan, desde enfoques teóricos y metodológicos diversos y transdisciplinarios, los fenómenos de las diversas expresiones de la cultura material y simbólica de la Humanidad; se abordan también aspectos de la sociedad, de la historia, la etnohistoria y la etnografía del Occidente de México, de sus agentes individuales y colectivos, y sus movimientos sociales.
           </p>
-        </div>
+        {{-- </div> --}}
       </div>
     </div>
   </div>
 </section>
+
 
 
 
