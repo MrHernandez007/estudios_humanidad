@@ -6,141 +6,140 @@
 <div class="container my-5">
 
     {{-- Título del libro --}}
-    <h1 class="mb-4 fw-bold text-center" style="color:#000; font-size:2rem; letter-spacing:0.5px;">
+    <h1 class="mb-4 fw-bold text-center" style="color:#2F3E46;">
         {{ $libro->titulo }}
     </h1>
 
     {{-- Imagen del libro --}}
-    <div class="text-center mb-5">
+    <div class="text-center mb-4">
         <img src="{{ Storage::url($libro->imagen) }}" 
              alt="{{ $libro->titulo }}" 
-             class="img-fluid rounded" 
-             style="max-height: 420px; object-fit: cover;">
+             class="img-fluid rounded shadow-sm border border-2" 
+             style="max-height: 450px; object-fit: cover; border-color:#7689A5;">
     </div>
 
     {{-- Información general --}}
-    <div class="mb-5 pb-4" style="border-bottom:1px solid #E0E0E0;">
-        <h4 class="fw-bold mb-4" style="color:#000; font-size:1.3rem;">
-            Información general
-        </h4>
+    <div class="card shadow-sm mb-5 border-0" style="background-color:#F4F5F7;">
+        <div class="card-body p-4">
+            <h4 class="card-title mb-4 fw-bold" style="color:#34142F;">
+                Información del libro
+            </h4>
 
-        @php
-            $roles = [
-                'autor_libro' => 'Autor', 
-                'coordinador' => 'Coordinador',
-                'editor' => 'Editor', 
-                'presentador' => 'Presentador', 
-                'compilador' => 'Compilador'
-            ];
-        @endphp
-
-        @foreach($roles as $clave => $nombreRol)
             @php
-                $autoresPorRol = $libro->autores->filter(fn($a) => in_array($clave, explode(',', $a->pivot->rol)));
+                $roles = [
+                    'autor_libro' => 'Autor', 
+                    'coordinador' => 'Coordinador',
+                    'editor' => 'Editor', 
+                    'presentador' => 'Presentador', 
+                    'compilador' => 'Compilador'
+                ];
             @endphp
-            @if($autoresPorRol->isNotEmpty())
-                <p class="mb-1">
-                    <strong>{{ $nombreRol }}:</strong> 
-                    <span>{{ $autoresPorRol->map(fn($a) => $a->nombre . ' ' . $a->apellido)->join(', ') }}</span>
-                </p>
+
+            @foreach($roles as $clave => $nombreRol)
+                @php
+                    $autoresPorRol = $libro->autores->filter(fn($a) => in_array($clave, explode(',', $a->pivot->rol)));
+                @endphp
+                @if($autoresPorRol->isNotEmpty())
+                    <p><strong>{{ $nombreRol }}:</strong> 
+                    <span style="color:#2F3E46;">{{ $autoresPorRol->map(fn($a) => $a->nombre . ' ' . $a->apellido)->join(', ') }}</span></p>
+                @endif
+            @endforeach
+
+            @if($libro->serie)
+                <p><strong>Serie:</strong> <span style="color:#2F3E46;">{{ $libro->serie->nombre }}</span></p>
             @endif
-        @endforeach
 
-        @if($libro->serie)
-            <p class="mb-1"><strong>Serie:</strong> {{ $libro->serie->nombre }}</p>
-        @endif
+            <p><strong>Volumen:</strong> <span style="color:#2F3E46;">{{ $libro->volumen }}</span></p>
+            <p><strong>Año:</strong> <span style="color:#2F3E46;">{{ $libro->anio }}</span></p>
 
-        <p class="mb-1"><strong>Volumen:</strong> {{ $libro->volumen }}</p>
-        <p class="mb-1"><strong>Año:</strong> {{ $libro->anio }}</p>
-
-        @if(!empty($libro->resumen))
-            <p class="mt-4 mb-2 fw-bold">Resumen</p>
-            <p style="text-align: justify; line-height:1.8; font-size:1rem;">
+            <p><strong>Resumen:</strong></p>
+            <p style="color:#4A5568; text-align: justify; line-height:1.8;">
                 {!! nl2br(e($libro->resumen)) !!}
             </p>
-        @endif
 
-        @if(!empty($libro->palabras_clave))
-            <p class="mt-4 mb-1"><strong>Palabras clave:</strong> {{ $libro->palabras_clave }}</p>
-        @endif
+            @if(!empty($libro->palabras_clave))
+                <p><strong>Palabras clave:</strong> 
+                    <span style="color:#2F3E46;">{{ $libro->palabras_clave }}</span>
+                </p>
+            @endif
 
-        <p class="mb-1"><strong>ISBN:</strong> {{ $libro->isbn }}</p>
+            <p><strong>ISBN:</strong> <span style="color:#2F3E46;">{{ $libro->isbn }}</span></p>
 
-        @if(!empty($libro->isbn_coleccion))
-            <p class="mb-1"><strong>ISBN colección:</strong> {{ $libro->isbn_coleccion }}</p>
-        @endif
+            @if(!empty($libro->isbn_coleccion))
+                <p><strong>ISBN colección:</strong> <span style="color:#2F3E46;">{{ $libro->isbn_coleccion }}</span></p>
+            @endif
 
-        @if(!empty($libro->cita))
-            <p class="mb-1"><strong>¿Cómo citar?:</strong> {{ $libro->cita }}</p>
-        @endif
+            @if(!empty($libro->cita))
+                <p><strong>¿Cómo citar?:</strong> 
+                    <span style="color:#2F3E46;">{{ $libro->cita }}</span></p>
+            @endif
 
-        @if($libro->pdf)
-            <div class="mt-3">
-                <a href="{{ asset('storage/' . $libro->pdf) }}" 
-                   target="_blank" 
-                   class="btn btn-dark btn-sm px-4">
-                   Ver PDF
-                </a>
-            </div>
-        @endif
+            @if($libro->pdf)
+                <p>
+                    <strong>Documento:</strong> 
+                    <a href="{{ asset('storage/' . $libro->pdf) }}" 
+                       target="_blank" 
+                       class="btn btn-sm text-white"
+                       style="background-color:#7689A5; border:none;">
+                       Ver PDF
+                    </a>
+                </p>
+            @endif
+        </div>
     </div>
 
     {{-- Contenido del libro --}}
-    <div class="pt-3">
-        <h4 class="fw-bold mb-4" style="color:#000; font-size:1.3rem;">
-            Contenido del libro
-        </h4>
+    <div class="card mb-4 shadow-sm border-0" style="background-color:#F4F5F7;">
+        <div class="card-body">
+            <h4 class="card-title mb-4 fw-bold" style="color:#34142F;">Contenido del libro</h4>
 
-        @foreach($libro->capitulos as $index => $capitulo)
-            <div class="mb-5">
-
-                {{-- Título del capítulo --}}
-                <h5 class="fw-bold mb-2" style="font-size:1.15rem; color:#000;">
+            @foreach($libro->capitulos as $index => $capitulo)
+                <h5 class="fw-bold mb-2" style="color:#2F3E46;">
                     {{ $capitulo->nombre }}
                 </h5>
 
-                {{-- Autores --}}
                 @if($capitulo->autores->isNotEmpty())
-                    <p class="mb-3">
-                        <strong>Autor(es):</strong> 
-                        {{ $capitulo->autores->map(fn($a) => $a->nombre . ' ' . $a->apellido)->join(', ') }}
-                    </p>
+                    <p><strong>Autor(es):</strong> 
+                    <span style="color:#4A5568;">{{ $capitulo->autores->map(fn($a) => $a->nombre . ' ' . $a->apellido)->join(', ') }}</span></p>
                 @endif
 
-                {{-- Descripción --}}
-                @php $lineas = explode("\n", $capitulo->descripcion); @endphp
+                @php
+                    $lineas = explode("\n", $capitulo->descripcion);
+                @endphp
                 @foreach($lineas as $linea)
                     @if(trim($linea) !== '')
-                        <p style="text-indent: 2em; text-align: justify; line-height: 1.8; font-size:1rem; color:#333;">
+                        <p class="text-muted" style="text-indent: 2em; text-align: justify; line-height: 1.8;">
                             {{ $linea }}
                         </p>
                     @endif
                 @endforeach
 
-                {{-- Cita del capítulo --}}
+                {{-- Cita del capítulo con collapse --}}
                 @if($capitulo->cita_articulo)
                     @php $collapseId = 'citaCapitulo' . $index; @endphp
+
                     <div class="my-3">
-                        <button class="btn btn-outline-dark btn-sm btn-cita" 
+                        <button class="btn btn-outline-secondary btn-sm btn-cita" 
                                 type="button" 
                                 data-bs-toggle="collapse" 
                                 data-bs-target="#{{ $collapseId }}" 
                                 aria-expanded="false" 
-                                aria-controls="{{ $collapseId }}">
+                                aria-controls="{{ $collapseId }}"
+                                style="border-color:#7689A5; color:#7689A5;">
                             Ver cita
                         </button>
 
                         <div class="collapse mt-3" id="{{ $collapseId }}">
-                            <div style="border-left:3px solid #000; padding-left:15px; font-style:italic;">
-                                {{ $capitulo->cita_articulo }}
+                            <div class="card card-body" style="background-color:#F7FAFC; border-left:5px solid #7689A5;">
+                                <em>{{ $capitulo->cita_articulo }}</em>
                             </div>
                         </div>
                     </div>
                 @endif
-
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
+
 </div>
 
 <script>

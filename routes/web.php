@@ -27,13 +27,13 @@ Route::get('/ejemplo', function () {
     return view('ejemplo');
 });
 
-Route::get('/Login', function () {
-    return view('General.Login');
-})->name('login'); 
+// Route::get('/Login', function () {
+//     return view('General.Login');
+// })->name('login'); 
 
 
 // Route::get('/Inicio', function () {return view('General.Inicio');})->name('inicio.general'); 
-Route::get('/Inicio', [InicioController::class, 'index'])->name('general.inicio');
+Route::get('/', [InicioController::class, 'index'])->name('general.inicio');
 Route::get('/publicacion/{id}', [InicioController::class, 'publicacionDetalle'])->name('general.publicacion.detalle');
 
 
@@ -450,9 +450,9 @@ Route::delete('admin/permissions/{permission}', [PermissionController::class, 'd
 
 //login???// 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/home', function () {
     return view('home');
@@ -470,7 +470,7 @@ require __DIR__.'/auth.php';
 
 
 
-Auth::routes();
+//Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

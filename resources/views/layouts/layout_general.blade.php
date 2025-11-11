@@ -144,9 +144,9 @@
         </div>
 
         <!-- Línea de copyright -->
-        <div class="d-flex flex-column flex-md-row justify-content-center align-items-center border-top pt-3" style="border-color: #4a4a4a;">
+        {{-- <div class="d-flex flex-column flex-md-row justify-content-center align-items-center border-top pt-3" style="border-color: #4a4a4a;">
             <small>&copy; 2025 Estudios de la Humanidad</small>
-        </div>
+        </div> --}}
     </div>
 </footer>
 

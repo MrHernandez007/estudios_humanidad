@@ -68,56 +68,47 @@
   </button>
 </div>
 
-    {{--==================== Seccion de recuadros =================--}}
 
 
-<section class="py-5 text-center" style="background-color:#f8f5ec;">
-  <div class="container">
-    {{-- <h2 class="fw-bold mb-5" style="color:#34142F;">Nuestros Logros</h2> --}}
+<!-- Sección de Contadores a Pantalla Completa -->
+<section class="d-flex flex-wrap position-relative text-center" style="height:100vh; background-color:#f8f5ec;">
 
-    <div class="row justify-content-center gy-4">
-      <!-- 1 -->
-      <div class="col-6 col-md-3">
-        <div class="p-4 rounded-4 shadow-sm" style="background-color:#F2B81B;">
-          <p class="text-white mb-0">Más de</p>
-          <h1 class="fw-bold mb-2 text-white counter" data-target="30">0</h1>
-          <p class="text-white mb-0">Años de trayectoria</p>
-        </div>
-      </div>
+  <!-- Líneas divisorias -->
+  <div style="position:absolute; top:50%; left:0; width:100%; height:2px;  transform:translateY(-50%); z-index:1;"></div>
+  <div style="position:absolute; left:50%; top:0; width:2px; height:100%;  transform:translateX(-50%); z-index:1;"></div>
 
-      <!-- 2 -->
-      <div class="col-6 col-md-3">
-        <div class="p-4 rounded-4 shadow-sm" style="background-color:#8291AB;">
-          <p class="text-white mb-0">Más de</p>
-          <h1 class="fw-bold mb-2 text-white counter" data-target="43">0</h1>
-          <p class="text-white mb-0">Volúmenes</p>
-        </div>
-      </div>
+  <!-- Cuadro 1 -->
+  <div class="col-6 d-flex flex-column justify-content-center align-items-center p-4 quadrant" style="background-color:#FFFFFF;">
+    <p class="fs-4 mb-0" style="color:#E44942;">Más de</p>
+    <h1 class="fw-bold counter" data-target="30" style="font-size:5rem; color:#E44942;">0</h1>
+    <p class="fs-4 mb-0" style="color:#E44942;">Años de trayectoria</p>
+  </div>
 
-      <!-- 3 -->
-      <div class="col-6 col-md-3">
-        <div class="p-4 rounded-4 shadow-sm" style="background-color:#34142F;">
-          <p class="text-white mb-0">Más de</p>
-          <h1 class="fw-bold mb-2 text-white counter" data-target="400">0</h1>
-          <p class="text-white mb-0">Autores</p>
-        </div>
-      </div>
+  <!-- Cuadro 2 -->
+  <div class="col-6 d-flex flex-column justify-content-center align-items-center p-4 quadrant" style="background-color:#FFFFFF;">
+    <p class="fs-4 mb-0" style="color:#7689A5;">Más de</p>
+    <h1 class="fw-bold counter" data-target="40" style="font-size:5rem; color:#7689A5;">0</h1>
+    <p class="fs-4 mb-0" style="color:#7689A5;">Volúmenes</p>
+  </div>
 
-      <!-- 4 -->
-      <div class="col-6 col-md-3">
-        <div class="p-4 rounded-4 shadow-sm" style="background-color:#E44942;">
-          <h1 class="fw-bold mb-2 text-white counter" data-target="24">0</h1>
-          <p class="text-white mb-0">Investigadores del comité editorial</p>
-        </div>
-      </div>
-    </div>
+  <!-- Cuadro 3 -->
+  <div class="col-6 d-flex flex-column justify-content-center align-items-center p-4 quadrant" style="background-color:#FFFFFF;">
+        <p class="fs-4 mb-0" style="color:#F2B81B;">Más de</p>
+    <h1 class="fw-bold counter" data-target="400" style="font-size:5rem; color:#F2B81B;">0</h1>
+    <p class="fs-4 mb-0" style="color:#F2B81B;">Autores</p>
+  </div>
+
+  <!-- Cuadro 4 -->
+  <div class="col-6 d-flex flex-column justify-content-center align-items-center p-4 quadrant" style="background-color:#FFFFFF;">
+    <h1 class="fw-bold counter" data-target="24" style="font-size:5rem; color:#34142F;">0</h1>
+    <p class="fs-4 mb-0" style="color:#34142F;">Investigadores del comité editorial</p>
   </div>
 </section>
 
 <script>
-  // --- Animación de los contadores ---
+  // --- Animación de contadores ---
   const counters = document.querySelectorAll('.counter');
-  const speed = 150; // más bajo = más rápido
+  const speed = 150;
 
   const animateCounters = () => {
     counters.forEach(counter => {
@@ -137,11 +128,17 @@
     });
   };
 
-  // Ejecuta la animación al cargar la página
-  window.addEventListener('load', animateCounters);
+  // Detecta cuando entra a la vista
+  const section = document.querySelector('section.d-flex.flex-wrap');
+  let started = false;
+  window.addEventListener('scroll', () => {
+    const sectionTop = section.offsetTop - window.innerHeight + 100;
+    if (!started && window.scrollY > sectionTop) {
+      animateCounters();
+      started = true;
+    }
+  });
 </script>
-
-
 
 
 
@@ -182,8 +179,16 @@
       <!-- Item 3 -->
       <div class="timeline-item">
         <div class="timeline-content bg-white shadow-sm rounded p-4">
+          <h5 class="fw-bold" style="color:#E44942;">2021</h5>
+          <p>Se actualiza el comité editorial.</p>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="timeline-item">
+        <div class="timeline-content bg-white shadow-sm rounded p-4">
           <h5 class="fw-bold" style="color:#E44942;">2023</h5>
-          <p><em>Estudios de la humanidad</em>  cambia el nombre de la colección a <em>Estudios de la humanidad</em>.</p>
+          <p><em>Estudios de la humanidad</em>  actualiza el nombre de la colección a <em>Estudios de la humanidad</em>.</p>
         </div>
       </div>
 
@@ -191,7 +196,15 @@
       <div class="timeline-item">
         <div class="timeline-content bg-white shadow-sm rounded p-4">
           <h5 class="fw-bold" style="color:#E44942;">2025</h5>
-          <p>Se modifica el logotipo del departamento</p>
+          <p>Se crea el logotipo del departamento.</p>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="timeline-item">
+        <div class="timeline-content bg-white shadow-sm rounded p-4">
+          <h5 class="fw-bold" style="color:#E44942;">2026</h5>
+          <p>Se integra los DOI a las publicaciones en formato digital.</p>
         </div>
       </div>
     </div>
@@ -204,75 +217,6 @@
 
 
 
-<!-- Sección de Contadores a Pantalla Completa -->
-<section class="d-flex flex-wrap position-relative text-center" style="height:100vh; background-color:#f8f5ec;">
-
-  <!-- Líneas divisorias -->
-  <div style="position:absolute; top:50%; left:0; width:100%; height:2px;  transform:translateY(-50%); z-index:1;"></div>
-  <div style="position:absolute; left:50%; top:0; width:2px; height:100%;  transform:translateX(-50%); z-index:1;"></div>
-
-  <!-- Cuadro 1 -->
-  <div class="col-6 d-flex flex-column justify-content-center align-items-center p-4 quadrant" style="background-color:#FFFFFF;">
-    <p class="fs-4 mb-0" style="color:#E44942;">Más de</p>
-    <h1 class="fw-bold counter" data-target="30" style="font-size:5rem; color:#E44942;">0</h1>
-    <p class="fs-4 mb-0" style="color:#E44942;">Años de trayectoria</p>
-  </div>
-
-  <!-- Cuadro 2 -->
-  <div class="col-6 d-flex flex-column justify-content-center align-items-center p-4 quadrant" style="background-color:#FFFFFF;">
-    <p class="fs-4 mb-0" style="color:#7689A5;">Más de</p>
-    <h1 class="fw-bold counter" data-target="40" style="font-size:5rem; color:#7689A5;">0</h1>
-    <p class="fs-4 mb-0" style="color:#7689A5;">Volúmenes</p>
-  </div>
-
-  <!-- Cuadro 3 -->
-  <div class="col-6 d-flex flex-column justify-content-center align-items-center p-4 quadrant" style="background-color:#FFFFFF;">
-        <p class="fs-4 mb-0" style="color:#F2B81B;">Más de</p>
-    <h1 class="fw-bold counter" data-target="400" style="font-size:5rem; color:#F2B81B;">0</h1>
-    <p class="fs-4 mb-0" style="color:#F2B81B;">Autores</p>
-  </div>
-
-  <!-- Cuadro 4 -->
-  <div class="col-6 d-flex flex-column justify-content-center align-items-center p-4 quadrant" style="background-color:#FFFFFF;">
-    <h1 class="fw-bold counter" data-target="24" style="font-size:5rem; color:#34142F;">0</h1>
-    <p class="fs-4 mb-0" style="color:#34142F;">Investigadores del comité editorial de distintos países</p>
-  </div>
-</section>
-
-<script>
-  // --- Animación de contadores ---
-  const counters = document.querySelectorAll('.counter');
-  const speed = 150;
-
-  const animateCounters = () => {
-    counters.forEach(counter => {
-      const updateCount = () => {
-        const target = +counter.getAttribute('data-target');
-        const count = +counter.innerText;
-        const increment = target / speed;
-
-        if (count < target) {
-          counter.innerText = Math.ceil(count + increment);
-          setTimeout(updateCount, 20);
-        } else {
-          counter.innerText = target;
-        }
-      };
-      updateCount();
-    });
-  };
-
-  // Detecta cuando entra a la vista
-  const section = document.querySelector('section.d-flex.flex-wrap');
-  let started = false;
-  window.addEventListener('scroll', () => {
-    const sectionTop = section.offsetTop - window.innerHeight + 100;
-    if (!started && window.scrollY > sectionTop) {
-      animateCounters();
-      started = true;
-    }
-  });
-</script>
 
 
 <section class="py-5" style="background: linear-gradient(180deg, #EDE4CA, #FFFFFF);">
@@ -300,7 +244,7 @@
 
 {{-- COMITÉ EDITORIAL CON COLLAPSE --}}
 <section class="container my-5">
-  <h3 class="fw-bold mb-3" style="display: inline-block; border-bottom: 1px solid #F2B81B; padding-bottom: 0.25rem;"">Comité Editorial</h3>
+  <h3 class="fw-bold mb-3" style="display: inline-block; border-bottom: 1px solid #F2B81B; padding-bottom: 0.25rem;">Comité Editorial</h3>
 
   {{-- Directora visible --}}
   <div class="mb-3">
@@ -333,7 +277,7 @@
 
 
 
-{{-- LINEAMIENTOS --}}
+{{-- LINEAMIENTOS Y NORMAS --}}
 <section class="container">
   <h3 class="fw-bold mb-3" style="display: inline-block; border-bottom: 1px solid #F2B81B; padding-bottom: 0.25rem;"">Lineamientos y Normas</h3>
   {{-- <div class="row g-4">
@@ -342,7 +286,7 @@
         <div class="card-body"> --}}
           <h5 class="card-title" style="color:#E44942;">Dictaminación y normas editoriales</h5>
           <p class="card-text text-muted">Revisa el proceso de dictaminación y las normas editoriales.</p>
-          <a href="{{ asset('pdfs/Proceso_dictaminacion.pdf') }}" download class="btn text-white" style="background-color:#F2B81B;">
+          <a href="{{ asset('pdfs/2025_Normas_actualizadas_guía_de_autores_y_coordinadores. EDH.docx.pdf') }}" download class="btn text-white" style="background-color:#F2B81B;">
             Descargar PDF
           </a>
         {{-- </div>
