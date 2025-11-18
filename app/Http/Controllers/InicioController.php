@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\ComiteEditorial;
 use App\Models\Publicacion;
+use Illuminate\Http\Request;
+use App\Models\Libro;
+
 
 class InicioController extends Controller
 {
@@ -26,5 +29,23 @@ class InicioController extends Controller
             ->findOrFail($id);
 
         return view('general.publicacion_detalle', compact('publicacion'));
+    }
+
+    public function buscar(Request $request)
+    {
+        $q = $request->input('q');
+
+        // Si no hay búsqueda, devolvemos vacío
+        if (!$q) {
+            return view('general.resultados', [
+                'resultados' => collect(),
+                'q' => ''
+            ]);
+        }
+
+        // Búsqueda con Scout/Meilisearch
+        $resultados = Libro::search($q)->get();
+
+        return view('general.resultados', compact('resultados', 'q'));
     }
 }

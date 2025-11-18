@@ -37,6 +37,8 @@ Route::get('/ejemplo', function () {
 // Route::get('/Inicio', function () {return view('General.Inicio');})->name('inicio.general'); 
 Route::get('/', [InicioController::class, 'index'])->name('general.inicio');
 Route::get('/publicacion/{id}', [InicioController::class, 'publicacionDetalle'])->name('general.publicacion.detalle');
+Route::get('/buscar', [InicioController::class, 'buscar'])->name('general.buscar');
+//Route::get('/buscar', [LibroController::class, 'buscar'])->name('libros.buscar');
 
 
 

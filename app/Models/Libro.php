@@ -5,10 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Searchable;
+
+// class Post extends Model
+// {
+//     use Searchable;
+// }
 
 class Libro extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, Searchable;
 
     // Nombre de la tabla (opcional si sigue la convención)
     protected $table = 'libros';
@@ -33,6 +39,27 @@ class Libro extends Model
         'tipos_id',
         
     ];
+
+    /**
+     * Campos que se indexarán en Meilisearch.
+     */
+    public function toSearchableArray()
+    {
+        return [
+            'titulo' => $this->titulo,
+            'volumen' => $this->volumen,
+            'anio' => $this->anio,
+            'resumen' => $this->resumen,
+            'cita' => $this->cita,
+            'isbn' => $this->isbn,
+            'isbn_coleccion' => $this->isbn_coleccion,
+            'palabras_clave' => $this->palabras_clave,
+            // Aquí indexamos todos los nombres de autores
+            'autores' => $this->autores->pluck('nombre')->toArray(),
+            // 'autor' => $this->autor,
+            'doi' => $this->doi,
+        ];
+    }
 
     // Campos tratados como fechas
     protected $dates = [
