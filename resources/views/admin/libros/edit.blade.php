@@ -77,12 +77,12 @@
         {{-- <div class="mb-3">
             <label for="resena" class="form-label">Reseña(por quitar)</label>
             <textarea name="resena" id="resena" class="form-control">{{ $libro->resena }}</textarea>
-        </div>
+        </div> --}}
 
         <div class="mb-3">
-            <label for="documento" class="form-label">Documento (texto o URL)(por quitar)</label>
-            <textarea name="documento" id="documento" class="form-control">{{ $libro->documento }}</textarea>
-        </div> --}}
+            <label for="doi" class="form-label">DOI</label>
+            <textarea name="doi" id="doi" class="form-control">{{ $libro->doi }}</textarea>
+        </div> 
 
         {{-- Serie --}}
         <div class="mb-3">

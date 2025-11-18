@@ -35,12 +35,12 @@
 
         <div class="mb-3">
             <label for="volumen" class="form-label">Volumen</label>
-            <input type="text" name="volumen" id="volumen" class="form-control" value="{{ old('volumen') }}">
+            <input type="text" name="volumen" id="volumen" class="form-control" required value="{{ old('volumen') }}">
         </div>
 
         <div class="mb-3">
             <label for="anio" class="form-label">Año</label>
-            <input type="number" name="anio" id="anio" class="form-control" value="{{ old('anio') }}">
+            <input type="number" name="anio" id="anio" class="form-control" required value="{{ old('anio') }}">
         </div>
 
         <div class="mb-3">
@@ -71,12 +71,12 @@
         {{-- <div class="mb-3">
             <label for="resena" class="form-label">Reseña (por quitar)</label>
             <textarea name="resena" id="resena" class="form-control">{{ old('resena') }}</textarea>
-        </div>
+        </div> --}}
 
         <div class="mb-3">
-            <label for="documento" class="form-label">Documento (texto o URL) (por quitar)</label>
-            <textarea name="documento" id="documento" class="form-control">{{ old('documento') }}</textarea>
-        </div> --}}
+            <label for="doi" class="form-label">DOI</label>
+            <textarea name="doi" id="doi" class="form-control">{{ old('doi') }}</textarea>
+        </div> 
 
         <div class="mb-3">
             <label for="serie" class="form-label">Serie</label>
@@ -142,12 +142,12 @@
 
         <div class="mb-3">
             <label for="pdf" class="form-label">PDF</label>
-            <input type="file" name="pdf" id="pdf" class="form-control" accept="application/pdf">
+            <input type="file" name="pdf" id="pdf" class="form-control" required accept="application/pdf">
         </div>
 
         <div class="mb-3">
             <label for="imagen" class="form-label">Imagen</label>
-            <input type="file" name="imagen" id="imagen" class="form-control">
+            <input type="file" name="imagen" id="imagen" required class="form-control">
         </div>
 
         <div class="mb-3">

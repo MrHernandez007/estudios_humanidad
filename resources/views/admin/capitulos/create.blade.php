@@ -16,7 +16,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="descripcion" class="form-label">Descripción (sub capítulos)</label>
+            <label for="descripcion" class="form-label">Sub capítulos (separados por salto de linea)</label>
             <textarea name="descripcion" id="descripcion" class="form-control" rows="10">{{ old('descripcion',$capitulo->descripcion ?? '') }}</textarea>
 
         </div>

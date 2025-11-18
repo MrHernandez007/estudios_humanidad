@@ -47,6 +47,7 @@ class LoginController extends Controller
  */
 protected function attemptLogin(Request $request)
 {
+    //dd('ESTO SI SE ESTA EJECUTANDO'); para esto es necesario Auth::routes();
     $credentials = $this->credentials($request);
 
     // 👇 Agregamos condición de estado = 1
@@ -65,6 +66,6 @@ protected function attemptLogin(Request $request)
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/Inicio'); // Página de inicio, redireccion 
+        return redirect('/'); // Página de inicio, redireccion 
     }
 }

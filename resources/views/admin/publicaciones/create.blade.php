@@ -44,8 +44,8 @@
             </select>
         </div>
 
-        <button class="btn btn-success">💾 Guardar</button>
-        <a href="{{ route('admin.publicaciones.index') }}" class="btn btn-secondary">⬅️ Volver</a>
+        <button class="btn btn-success">Guardar</button>
+        <a href="{{ route('admin.publicaciones.index') }}" class="btn btn-secondary">Volver</a>
     </form>
 </div>
 @endsection

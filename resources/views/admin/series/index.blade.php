@@ -2,7 +2,7 @@
 
 @section('contenido')
 <div class="container mt-4">
-    <h2 class="mb-4">Lista de Series</h2>
+    <h2 class="mb-4">Series</h2>
 
     <a href="{{ route('admin.series.create') }}" class="btn btn-primary mb-3" style="background-color: #34142F; border: none; outline: none; box-shadow: none;">➕ Nueva Serie</a>
 

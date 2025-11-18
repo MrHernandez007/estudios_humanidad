@@ -7,25 +7,10 @@ use App\Models\Libro;
 
 class LibrosPublicController extends Controller
 {
-    // public function index()
-    // {
-    //     // Obtener todos los libros o filtrarlos por colección
-    //     $libros = Libro::all(); // o Libro::where('coleccion', 'Estudios del Hombre')->get();
-
-    //     return view('publico.coleccion', compact('libros'));
-    // }
-
-
-//     public function index()
-// {
-//     // Trae todos los libros o puedes filtrar por colección
-//     $libros = Libro::all(); 
-//     return view('general.coleccion', compact('libros'));
-// }
 
     public function index($tipo)
 {
-    // Buscar el tipo por id
+    // Buscar el tipo por id del tipo (colección)
     $tipoSeleccionado = \App\Models\Tipo::findOrFail($tipo);
 
     // Filtrar libros de ese tipo y activos
@@ -37,12 +22,6 @@ class LibrosPublicController extends Controller
 }
 
 
-
-    // public function show($id)
-    // {
-    //     $libro = Libro::findOrFail($id); // Muestra detalle de un libro
-    //     return view('general.detalle', compact('libro'));
-    // }
 
 public function show($id)
 {

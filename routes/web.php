@@ -15,6 +15,8 @@ use App\Http\Controllers\TiposController;
 use App\Http\Controllers\LibrosPublicController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
+use Illuminate\Support\Facades\Auth;
+
 
 
 
@@ -470,7 +472,7 @@ require __DIR__.'/auth.php';
 
 
 
-//Auth::routes();
+Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

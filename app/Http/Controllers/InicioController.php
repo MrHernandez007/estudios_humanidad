@@ -12,10 +12,8 @@ class InicioController extends Controller
         // Comité editorial activo
         $comite = ComiteEditorial::where('estado', 1)->get();
 
-        // Últimas 3 publicaciones activas para el carrusel (todas o solo convocatorias)
         $publicaciones = Publicacion::where('estado', 1)
             ->latest('fecha')
-            // ->take(3)
             ->get();
 
         return view('general.inicio', compact('comite', 'publicaciones'));
@@ -25,8 +23,6 @@ class InicioController extends Controller
     {
         // Obtener la publicación y asegurarse que sea una convocatoria activa
         $publicacion = Publicacion::where('estado', 1)
-            // ->where('tipo', 'convocatoria')
-            // ->with(['autores', 'serie', 'capitulos.autores'])
             ->findOrFail($id);
 
         return view('general.publicacion_detalle', compact('publicacion'));

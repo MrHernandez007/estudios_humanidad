@@ -73,6 +73,7 @@ class LibroUpdateRequest extends FormRequest
         'isbn'            => 'nullable|max:20',
         'isbn_coleccion'  => 'nullable|max:20',
         'palabras_clave'  => 'nullable',
+        'doi'             => 'nullable',
         'resena'          => 'nullable',
         'documento'       => 'nullable',
         'pdf'             => 'nullable',

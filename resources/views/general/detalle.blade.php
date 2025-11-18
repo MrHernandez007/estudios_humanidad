@@ -63,6 +63,12 @@
                 </p>
             @endif
 
+            @if(!empty($libro->doi))
+                <p><strong>DOI:</strong> 
+                    <span style="color:#2F3E46;">{{ $libro->doi }}</span>
+                </p>
+            @endif
+
             <p><strong>ISBN:</strong> <span style="color:#2F3E46;">{{ $libro->isbn }}</span></p>
 
             @if(!empty($libro->isbn_coleccion))

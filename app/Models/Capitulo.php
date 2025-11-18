@@ -37,16 +37,6 @@ class Capitulo extends Model
     {
         return $this->belongsTo(Libro::class, 'libro_id');
     }
-
-    /**
-     * Relación con Autor
-     */
-    /* este era antes
-    public function autor()
-    {
-        return $this->belongsTo(Autor::class, 'autor_id');
-    } 
-    */
     
     /**
      * Relación muchos a muchos con Autor

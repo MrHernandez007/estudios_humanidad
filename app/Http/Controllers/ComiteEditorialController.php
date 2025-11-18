@@ -31,25 +31,6 @@ class ComiteEditorialController extends Controller
         return view('admin.comite_editorial.create');
     }
 
-    /**
-     * Guardar nuevo miembro en la BD.
-     */
-
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'nombre'      => 'required|string|max:255',
-    //         'apellido'    => 'required|string|max:255',
-    //         'dependencia' => 'required|string|max:255',
-    //         'pais'        => 'required|string|max:255',
-    //         'estado'      => 'required|boolean',
-    //     ]);
-
-    //     ComiteEditorial::create($request->all());
-
-    //     return redirect()->route('admin.comite_editorial.index')
-    //                      ->with('success', 'Miembro agregado correctamente.');
-    // }
 
     public function store(ComiteEditorialStoreRequest $request)
     {
@@ -75,25 +56,6 @@ class ComiteEditorialController extends Controller
         return view('admin.comite_editorial.edit', ['miembro' => $comite_editorial]);
     }
 
-    /**
-     * Actualizar datos de un miembro.
-     */
-
-    // public function update(Request $request, ComiteEditorial $comite_editorial)
-    // {
-    //     $request->validate([
-    //         'nombre'      => 'required|string|max:255',
-    //         'apellido'    => 'required|string|max:255',
-    //         'dependencia' => 'required|string|max:255',
-    //         'pais'        => 'required|string|max:255',
-    //         'estado'      => 'required|boolean',
-    //     ]);
-
-    //     $comite_editorial->update($request->all());
-
-    //     return redirect()->route('admin.comite_editorial.index')
-    //                      ->with('success', 'Miembro actualizado correctamente.');
-    // }
 
 
     public function update(ComiteEditorialUpdateRequest $request, ComiteEditorial $comiteEditorial)

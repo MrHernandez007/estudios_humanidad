@@ -25,7 +25,7 @@ class Libro extends Model
         'isbn_coleccion',
         'palabras_clave',
         'resena',
-        'documento',
+        'doi',
         'pdf',
         'imagen',
         'estado',
@@ -73,11 +73,6 @@ class Libro extends Model
     // 'tipos_id' es la columna en libros que referencia a tipos.id
 }
 
-// Libro.php
-// public function getImagenUrlAttribute()
-// {
-//     return $this->imagen ? Storage::url($this->imagen) : null;
-// }
 
 
 

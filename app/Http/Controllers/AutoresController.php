@@ -37,22 +37,6 @@ class AutoresController extends Controller
         return view('admin.autores.create');
     }
 
-    /**
-     * Guardar un autor nuevo
-     */
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'nombre' => 'required|max:100',
-    //         'apellido' => 'required|max:100',
-    //         'estado' => 'required|boolean',
-    //     ]);
-
-    //     Autor::create($request->all());
-
-    //     return redirect()->route('admin.autores.index')->with('success', 'Autor creado correctamente.');
-    // }
-
     public function store(AutorStoreRequest $request)
     {
         Autor::create($request->validated());
@@ -79,21 +63,6 @@ class AutoresController extends Controller
         return view('admin.autores.edit', compact('autor'));
     }
 
-    /**
-     * Actualizar un autor
-     */
-    // public function update(Request $request, Autor $autor)
-    // {
-    //     $request->validate([
-    //         'nombre' => 'required|max:100',
-    //         'apellido' => 'required|max:100',
-    //         'estado' => 'required|boolean',
-    //     ]);
-
-    //     $autor->update($request->all());
-
-    //     return redirect()->route('admin.autores.index')->with('success', 'Autor actualizado correctamente.');
-    // }
 
     public function update(AutorUpdateRequest $request, Autor $autor)
     {

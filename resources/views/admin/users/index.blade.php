@@ -3,7 +3,7 @@
 @section('contenido')
 <div class="container mt-4">
 
-    <h2 class="mb-4">Listado de Administradores</h1><br>
+    <h2 class="mb-4">Administradores</h1><br>
 
 <a href="{{ route('admin.users.create') }}" 
    class="btn btn-primary mb-3" 

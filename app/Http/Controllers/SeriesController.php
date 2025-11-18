@@ -26,28 +26,14 @@ class SeriesController extends Controller
         return view('admin.series.create');
     }
 
-    /**
-     * Guardar una serie nueva.
-     */
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'nombre' => 'required|max:255|unique:series,nombre',
-    //         'descripcion' => 'nullable',
-    //         'estado' => 'required|boolean',
-    //     ]);
 
-    //     Serie::create($request->all());
 
-    //     return redirect()->route('admin.series.index')->with('success', 'Serie creada correctamente.');
-    // }
+        public function store(SerieStoreRequest $request)
+    {
+        Serie::create($request->validated());
 
-    public function store(SerieStoreRequest $request)
-{
-    Serie::create($request->validated());
-
-    return redirect()->route('admin.series.index')->with('success', 'Serie creada correctamente.');
-}
+        return redirect()->route('admin.series.index')->with('success', 'Serie creada correctamente.');
+    }
 
 
     /**
@@ -66,28 +52,12 @@ class SeriesController extends Controller
         return view('admin.series.edit', compact('serie'));
     }
 
-    /**
-     * Actualizar una serie.
-     */
-    // public function update(Request $request, Serie $serie)
-    // {
-    //     $request->validate([
-    //         'nombre' => 'required|max:255|unique:series,nombre,'.$serie->id,
-    //         'descripcion' => 'nullable',
-    //         'estado' => 'required|boolean',
-    //     ]);
+        public function update(SerieUpdateRequest $request, Serie $serie)
+    {
+        $serie->update($request->validated());
 
-    //     $serie->update($request->all());
-
-    //     return redirect()->route('admin.series.index')->with('success', 'Serie actualizada correctamente.');
-    // }
-
-    public function update(SerieUpdateRequest $request, Serie $serie)
-{
-    $serie->update($request->validated());
-
-    return redirect()->route('admin.series.index')->with('success', 'Serie actualizada correctamente.');
-}
+        return redirect()->route('admin.series.index')->with('success', 'Serie actualizada correctamente.');
+    }
 
 
     /**

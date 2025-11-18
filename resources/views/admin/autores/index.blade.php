@@ -2,7 +2,7 @@
 
 @section('contenido')
 <div class="container mt-4">
-    <h2 class="mb-4">Lista de Autores</h2>
+    <h2 class="mb-4">Autores</h2>
 
     <a href="{{ route('admin.autores.create') }}" class="btn btn-primary mb-3" style="background-color: #34142F; border: none; outline: none; box-shadow: none;">➕ Nuevo Autor</a>
 

@@ -12,6 +12,7 @@
     <p><strong>ISBN:</strong> {{ $libro->isbn }}</p>
     <p><strong>ISBN Colección:</strong> {{ $libro->isbn_coleccion }}</p>
     <p><strong>Palabras clave:</strong> {{ $libro->palabras_clave }}</p>
+    <p><strong>DOI:</strong> {{ $libro->doi }}</p>
     <p><strong>Documento:</strong> <a href="{{ asset('storage/' . $libro->pdf) }}" target="_blank">Ver PDF</a></p>
     <p><strong>Serie:</strong> {{ $libro->serie->nombre ?? '-' }}</p>
 
