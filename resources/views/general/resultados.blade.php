@@ -46,18 +46,16 @@
                                 <p><strong>Año:</strong> {{ $libro->anio }}</p>
                             @endif
 
-                            {{-- Autores --}}
-                            @if($libro->autores->isNotEmpty())
-                                <p>
-                                    <strong>Autor(es):</strong> 
-                                    {{ $libro->autores->pluck('nombre')->join(', ') }}
-                                </p>
+
+                            @if($libro->nombre)
+                                <p><strong>Autor(es):</strong> {{ $libro->nombre }} {{ $libro->apellido }}</p>
                             @endif
 
+
                             {{-- DOI --}}
-                            @if($libro->doi)
+                            {{-- @if($libro->doi)
                                 <p><strong>DOI:</strong> {{ $libro->doi }}</p>
-                            @endif
+                            @endif --}}
 
                             {{-- Botón de detalle --}}
                             <a href="{{ route('general.libro.detalle', $libro->id) }}" 
