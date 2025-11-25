@@ -19,7 +19,7 @@ class Libro extends Model
     // Nombre de la tabla (opcional si sigue la convención)
     protected $table = 'libros';
 
-    protected $appends = ['autores'];
+    //protected $appends = ['autores'];
 
     // Campos que se pueden asignar masivamente
     protected $fillable = [
