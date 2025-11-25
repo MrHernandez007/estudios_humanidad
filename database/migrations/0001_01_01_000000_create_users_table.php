@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('estado'); // agregada
+            $table->tinyInteger('estado')->default(1);
+            //$table->string('estado'); 
             $table->rememberToken();
             $table->softDeletes(); // agregada
             $table->timestamps();

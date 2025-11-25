@@ -31,50 +31,37 @@
       <span style="color: #4a4a4a;">Inicio</span>
     </a>
 
-    <!-- Botón hamburguesa (móvil) -->
+    <!-- Botón móvil -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContenido"
       aria-controls="navbarContenido" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Contenido del navbar (colapsable) -->
+    <!-- Contenido del navbar -->
     <div class="collapse navbar-collapse justify-content-center" id="navbarContenido">
-      <ul class="navbar-nav text-center">
-        <li class="nav-item px-3">
-          <a class="nav-link {{ request()->routeIs('general.coleccion') && request()->route('tipo') == 7 ? 'fw-bold' : '' }}"
-             href="{{ route('general.coleccion', 7) }}"
-             style="color: #4a4a4a;">
-            Estudios de la Humanidad
-          </a>
-        </li>
-        <li class="nav-item px-3">
-          <a class="nav-link {{ request()->routeIs('general.coleccion') && request()->route('tipo') == 8 ? 'fw-bold' : '' }}"
-             href="{{ route('general.coleccion', 8) }}"
-             style="color: #4a4a4a;">
-            Estudios del Hombre
-          </a>
-        </li>
-        <li class="nav-item px-3">
-          <a class="nav-link {{ request()->routeIs('general.coleccion') && request()->route('tipo') == 9 ? 'fw-bold' : '' }}"
-             href="{{ route('general.coleccion', 9) }}"
-             style="color: #4a4a4a;">
-            Revista Estudios del Hombre
-          </a>
-        </li>
-      </ul>
+
+      @if (isset($tipos) && $tipos->count() > 0)
+        <ul class="navbar-nav text-center">
+          @foreach ($tipos as $tipo)
+            <li class="nav-item px-3">
+              <a class="nav-link
+                {{ request()->routeIs('general.coleccion') && request()->route('tipo') == $tipo->id ? 'fw-bold' : '' }}"
+                href="{{ route('general.coleccion', $tipo->id) }}"
+                style="color: #4a4a4a;">
+                {{ $tipo->nombre }}
+              </a>
+            </li>
+          @endforeach
+        </ul>
+      @endif
+
     </div>
 
   </div>
 </nav>
-<!-- {{-- HERO con logo a lo largo de la pantalla --}} -->
-{{-- <section class="w-100" style="background-color: transparent; padding: 0; margin: 0;">
-    <div class="container-fluid p-0 m-0">
-        <img src="{{ asset('imagenes/logos/1_LOGO_PRINCIPAL_con_titulo_ROJO.jpg') }}" 
-             alt="Logo Estudios de la Humanidad" 
-             class="img-fluid w-100" 
-             style="height: 50px; object-fit: contain; display: block;">
-    </div>
-</section> --}}
+
+
+
 
 
 
