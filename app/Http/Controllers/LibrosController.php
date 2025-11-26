@@ -69,9 +69,9 @@ class LibrosController extends Controller
     $tipoId = (int) ($data['tipos_id'] ?? 0);
 
     $tipoCarpeta = match($tipoId) {
-        7 => 'estudios_humanidad',
-        8 => 'estudios_del_hombre',
-        9 => 'revista_estudios_del_hombre',
+        3 => 'estudios_humanidad',
+        2 => 'estudios_del_hombre',
+        1 => 'revista_estudios_del_hombre',
         default => 'otros',
     };
 
@@ -152,9 +152,9 @@ class LibrosController extends Controller
 
     // Carpeta según tipo
     $tipoCarpeta = match($data['tipos_id'] ?? null) {
-        7 => 'estudios_humanidad',
-        8 => 'estudios_del_hombre',
-        9 => 'revista_estudios_del_hombre',
+        3 => 'estudios_humanidad',
+        2 => 'estudios_del_hombre',
+        1 => 'revista_estudios_del_hombre',
         default => 'otros',
     };
 
