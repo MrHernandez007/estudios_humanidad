@@ -50,6 +50,6 @@
     </table>
     </div>
 
-    {{ $tipos->links('pagination::bootstrap-5') }}
+    
 </div>
 @endsection

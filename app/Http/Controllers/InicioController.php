@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Libro;
 use App\Models\Tipo;
 use App\Models\Relacion;
+use Illuminate\Support\Facades\Schema;
 
 
 class InicioController extends Controller
@@ -48,8 +49,23 @@ class InicioController extends Controller
             ]);
         }
 
+        // Evitar error cuando no existe tabla o falta BD
+        if (!Schema::hasTable('relaciones')) {
+            return view('general.resultados', [
+                'resultados' => collect(),
+                'q' => $q
+            ]);
+        }
+
+        try {
+            $resultados = Relacion::search($q)->get();
+        } catch (\Exception $e) {
+            // Si falla Scout o falla la BD, devolvemos vacío sin romper todo
+            $resultados = collect();
+        }
+
         // Resultados desde Scout (Database Engine)
-        $resultados = Relacion::search($q)->get();
+        //$resultados = Relacion::search($q)->get();
 
         // Reordenar manualmente según coincidencia en el título
         $resultados = $resultados->sortBy(function ($item) use ($q) {
