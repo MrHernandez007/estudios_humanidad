@@ -3,6 +3,23 @@
 @section('contenido')
 <div style="font-family: 'Cambria', serif; background-color:#FFFFFF; min-height:100vh;">
 
+<div class="d-flex justify-content-end mb-3">
+    <form action="{{ route('general.buscar') }}" method="GET" class="d-flex gap-2">
+        <input 
+            type="text"
+            name="q"
+            placeholder="Buscar..."
+            class="border p-2 rounded w-64"
+        >
+        <button 
+            type="submit"
+            class="btn btn-outline-dark"
+        >
+            Buscar
+        </button>
+    </form>
+</div>
+
 <div class="container my-5">
 
     {{-- Título del libro --}}
