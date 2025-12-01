@@ -33,7 +33,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                 {{-- Administradores --}}
-                @can('Usuarios Crear')
+                @can('Administradores Crear')
                     <li class="nav-item px-2">
                         <a class="nav-link {{ request()->routeIs('admin.users.index') ? 'active fw-bold' : '' }}"
                            href="{{ route('admin.users.index') }}">
