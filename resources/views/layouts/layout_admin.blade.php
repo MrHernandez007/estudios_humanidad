@@ -63,7 +63,7 @@
                 @endcan
 
                 {{-- Comité editorial --}}
-                @can('Comite Crear')
+                @can('Comite_Editorial Crear')
                 <li class="nav-item px-2">
                     <a class="nav-link {{ request()->routeIs('admin.comite_editorial.index') ? 'active fw-bold' : '' }}"
                        href="{{ route('admin.comite_editorial.index') }}">
