@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('isbn_coleccion')->nullable();
             $table->text('palabras_clave')->nullable();
             $table->text('resena')->nullable();
-            $table->string('documento')->nullable();
+            $table->string('doi')->nullable();
             $table->string('pdf')->nullable();
             $table->string('imagen')->nullable();
             $table->boolean('estado')->default(true);
