@@ -30,15 +30,7 @@
                             {{ $tipo->estado ? 'Activo' : 'Inactivo' }}
                         </span>
                     </td>
-                    {{-- <td>
-                        <a href="{{ route('admin.tipos.show', $tipo) }}" class="btn btn-info btn-sm">👁️ Ver</a>
-                        <a href="{{ route('admin.tipos.edit', $tipo) }}" class="btn btn-warning btn-sm">✏️ Editar</a>
-                        <form action="{{ route('admin.tipos.destroy', $tipo) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que deseas eliminar este tipo?')">🗑️ Eliminar</button>
-                        </form>
-                    </td> --}}
+
                     <x-acciones-crud :model="$tipo" :routeName="'tipos'"/>
                 </tr>
             @empty

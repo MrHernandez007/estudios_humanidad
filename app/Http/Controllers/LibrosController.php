@@ -180,17 +180,41 @@ class LibrosController extends Controller
     $libro->update($data);
 
     // Actualizar autores y roles
+    // $libro->autores()->detach();
+    // if ($request->filled('roles')) {
+    //     foreach ($request->roles as $r) {
+    //         $autorId = $r['autor_id'];
+    //         if (!$autorId) continue;
+    //         foreach ($r['roles'] as $rol) {
+    //             $libro->autores()->syncWithoutDetaching([
+    //                 $autorId => ['rol' => $rol, 'created_at' => now(), 'updated_at' => now()]
+    //             ]);
+    //         }
+    //     }
+    // }
+
+    // Actualizar autores y roles
     $libro->autores()->detach();
+
     if ($request->filled('roles')) {
+        $attachData = [];
+
         foreach ($request->roles as $r) {
             $autorId = $r['autor_id'];
             if (!$autorId) continue;
+
             foreach ($r['roles'] as $rol) {
-                $libro->autores()->syncWithoutDetaching([
-                    $autorId => ['rol' => $rol, 'created_at' => now(), 'updated_at' => now()]
-                ]);
+                $attachData[$autorId . '-' . $rol] = [
+                    'autor_id' => $autorId,
+                    'rol' => $rol,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
             }
         }
+
+        // Attach MULTIPLE combinaciones autor–rol
+        $libro->autores()->attach($attachData);
     }
 
     return redirect()->route('admin.libros.index')
