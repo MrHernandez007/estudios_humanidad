@@ -55,7 +55,7 @@ class InicioController extends Controller
         try {
             // Intentar consultar la vista 'relaciones'
             // (si no existe tabla/vista o no hay BD → salta al catch)
-            $test = \DB::table('relaciones')->limit(1)->get();
+            $test = DB::table('relaciones')->limit(1)->get();
 
             // Buscar con Scout
             $resultados = Relacion::search($q)->get();
