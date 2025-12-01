@@ -44,7 +44,10 @@
                         <button class="btn btn-danger" onclick="return confirm('¿Seguro?')">🗑 Eliminar</button>
                     </form>
                 </td> --}}
-                <x-acciones-crud :model="$capitulo" :routeName="'capitulos'"/>
+                {{-- <x-acciones-crud :model="$capitulo" :routeName="'capitulos'"/> --}}
+                {{-- <x-acciones-crud :model="$capitulo" :routeName="'capitulos'" :$tipo="'Capitulos'"/> --}}
+                <x-acciones-crud :model="$capitulo" routeName="capitulos" tipo="Capitulos" />
+
             </tr>
             @endforeach
         </tbody>

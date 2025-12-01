@@ -29,7 +29,8 @@
                         <button class="btn btn-danger" onclick="return confirm('¿Seguro?')">🗑 Eliminar</button>
                     </form>
                 </td> --}}
-                <x-acciones-crud :model="$permission" :routeName="'permissions'"/>
+                {{-- <x-acciones-crud :model="$permission" :routeName="'permissions'"/> --}}
+                <x-acciones-crud :model="$permission" routeName="permissions" tipo="Permissions" />
             </tr>
             @endforeach
         </tbody>

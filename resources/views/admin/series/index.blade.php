@@ -30,16 +30,10 @@
                             {{ $serie->estado ? 'Activo' : 'Inactivo' }}
                         </span>
                     </td>
-                    {{-- <td>
-                        <a href="{{ route('admin.series.show', $serie) }}" class="btn btn-info btn-sm">👁️ Ver</a>
-                        <a href="{{ route('admin.series.edit', $serie) }}" class="btn btn-warning btn-sm">✏️ Editar</a>
-                        <form action="{{ route('admin.series.destroy', $serie) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que deseas eliminar esta serie?')">🗑️ Eliminar</button>
-                        </form>
-                    </td> --}}
-                    <x-acciones-crud :model="$serie" :routeName="'series'"/>
+              
+                    {{-- <x-acciones-crud :model="$serie" :routeName="'series'"/> --}}
+
+                    <x-acciones-crud :model="$serie" routeName="series" tipo="Series" />
                 </tr>
             @empty
                 <tr>

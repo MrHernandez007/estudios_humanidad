@@ -34,18 +34,8 @@
                             {{ $libro->estado ? 'Activo' : 'Inactivo' }}
                         </span>
                     </td>
-                    {{-- <td> --}}
-                        {{-- @include('se-botpones',[$permisoE => ['n','r'],$del => ['p','r']]) --}}
-                        {{-- <a href="{{ route('admin.libros.show', $libro) }}" class="btn btn-info btn-sm">👁️ Ver</a>
-                        <a href="{{ route('admin.libros.edit', $libro) }}" class="btn btn-warning btn-sm">✏️ Editar</a>
-                        <form action="{{ route('admin.libros.destroy', $libro) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que deseas eliminar este libro?')">🗑️ Eliminar</button>
-                        </form> --}}
-                        
-                    {{-- </td> --}}
-                    <x-acciones-crud :model="$libro" :routeName="'libros'"/>
+                    {{-- <x-acciones-crud :model="$libro" :routeName="'libros'"/> --}}
+                    <x-acciones-crud :model="$libro" routeName="libros" tipo="Libros" />
                 </tr>
             @empty
                 <tr>

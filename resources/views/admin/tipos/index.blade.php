@@ -31,7 +31,9 @@
                         </span>
                     </td>
 
-                    <x-acciones-crud :model="$tipo" :routeName="'tipos'"/>
+                    {{-- <x-acciones-crud :model="$tipo" :routeName="'tipos'"/> --}}
+
+                    <x-acciones-crud :model="$tipo" routeName="tipos" tipo="Tipos" />
                 </tr>
             @empty
                 <tr>

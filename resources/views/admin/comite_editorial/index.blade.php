@@ -36,16 +36,9 @@
                             {{ $miembro->estado ? 'Activo' : 'Inactivo' }}
                         </span>
                     </td>
-                    {{-- <td>
-                        <a href="{{ route('admin.comite_editorial.show', $miembro) }}" class="btn btn-info btn-sm">👁️ Ver</a>
-                        <a href="{{ route('admin.comite_editorial.edit', $miembro) }}" class="btn btn-warning btn-sm">✏️ Editar</a>
-                        <form action="{{ route('admin.comite_editorial.destroy', $miembro) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que deseas eliminar este miembro?')">🗑️ Eliminar</button>
-                        </form>
-                    </td> --}}
-                    <x-acciones-crud :model="$miembro" :routeName="'comite_editorial'"/>
+
+                    {{-- <x-acciones-crud :model="$miembro" :routeName="'comite_editorial'"/> --}}
+                    <x-acciones-crud :model="$miembro" routeName="comite_editorial" tipo="Comite_Editorial" />
                 </tr>
             @empty
                 <tr>

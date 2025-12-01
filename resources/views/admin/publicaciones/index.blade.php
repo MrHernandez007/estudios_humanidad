@@ -51,7 +51,8 @@
                             <button class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que deseas eliminar esta publicación?')">🗑️ Eliminar</button>
                         </form>
                     </td> --}}
-                    <x-acciones-crud :model="$publicacion" :routeName="'publicaciones'"/>
+                    {{-- <x-acciones-crud :model="$publicacion" :routeName="'publicaciones'"/> --}}
+                    <x-acciones-crud :model="$publicaciones" routeName="publicaciones" tipo="Publicaciones" />
                 </tr>
             @empty
                 <tr>

@@ -52,7 +52,9 @@
                         </span>
                         </td>
 
-                        <x-acciones-crud :model="$user" :routeName="'users'"/>
+                        {{-- <x-acciones-crud :model="$user" :routeName="'users'"/> --}}
+
+                        <x-acciones-crud :model="$user" routeName="users" tipo="Users" />
                     </tr>
                 @empty
                     <tr>

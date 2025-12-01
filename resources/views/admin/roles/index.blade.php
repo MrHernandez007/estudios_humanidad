@@ -21,7 +21,8 @@
                 <td>{{ $role->id }}</td>
                 <td>{{ $role->name }}</td>
                 <td>{{ $role->guard_name }}</td>               
-                 <x-acciones-crud :model="$role" :routeName="'roles'"/>
+                 {{-- <x-acciones-crud :model="$role" :routeName="'roles'"/> --}}
+                 <x-acciones-crud :model="$role" routeName="roles" tipo="Roles" />
 
             </tr>
             @endforeach
