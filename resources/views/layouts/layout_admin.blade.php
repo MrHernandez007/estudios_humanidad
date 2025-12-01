@@ -83,7 +83,7 @@
                 @endcan
 
                 {{-- Dropdown Libros (si puede Crear cualquier submódulo) --}}
-                @canany(['Autores Crear', 'Series Crear', 'Capitulos Crear', 'Colecciones Crear', 'Libros Crear'])
+                @canany(['Autores Crear', 'Series Crear', 'Capitulos Crear', 'Tipos Crear', 'Libros Crear'])
                 <li class="nav-item dropdown px-2">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Libros</a>
 
@@ -101,7 +101,7 @@
                             <li><a class="dropdown-item" href="{{ route('admin.capitulos.index') }}">Capítulos</a></li>
                         @endcan
 
-                        @can('Colecciones Crear')
+                        @can('Tipos Crear')
                             <li><a class="dropdown-item" href="{{ route('admin.tipos.index') }}">Colecciones</a></li>
                         @endcan
 

@@ -54,7 +54,7 @@
 
                         {{-- <x-acciones-crud :model="$user" :routeName="'users'"/> --}}
 
-                        <x-acciones-crud :model="$user" routeName="users" tipo="Users" />
+                        <x-acciones-crud :model="$user" routeName="users" tipo="Administradores" />
                     </tr>
                 @empty
                     <tr>
