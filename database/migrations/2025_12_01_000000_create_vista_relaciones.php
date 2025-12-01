@@ -5,7 +5,10 @@ use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
-    /**
+    /** 2025_12_01_000000_create_vista_relaciones
+     * 0001_01_01_000000_create_vista_relaciones
+     * 0001_01_01_000000_create_users_table
+     * 
      * Run the migrations.
      */
     public function up(): void
