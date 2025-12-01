@@ -74,7 +74,7 @@ class LibroStoreRequest extends FormRequest
         'pdf'            => 'nullable',
         'estado'         => 'required|boolean',
         'series_id'      => 'nullable|exists:series,id,deleted_at,NULL',
-        'tipos_id'       => 'required|in:7,8,9',
+        'tipos_id'       => 'required',
         'imagen'         => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
         'roles'          => 'nullable|array',
     ];

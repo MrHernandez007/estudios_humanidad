@@ -79,7 +79,7 @@ class LibroUpdateRequest extends FormRequest
         'pdf'             => 'nullable',
         'estado'          => 'required|boolean',
         'series_id'       => 'nullable|exists:series,id',
-        'tipos_id'         => 'required|in:7,8,9',
+        'tipos_id'         => 'required',
         'imagen'          => 'nullable|image|mimes:jpg,jpeg,png|max:5120',
         'roles'           => 'nullable|array',
     ];
