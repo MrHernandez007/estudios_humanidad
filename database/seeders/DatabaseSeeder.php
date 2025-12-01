@@ -29,6 +29,8 @@ class DatabaseSeeder extends Seeder
             'guard_name' => 'web',
         ]);
 
+        
+
         // Asignar rol al usuario
         $user->assignRole('Desarrollador');
         $user->assignRole($role);

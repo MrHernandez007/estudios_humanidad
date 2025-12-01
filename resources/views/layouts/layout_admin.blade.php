@@ -14,125 +14,124 @@
 </head>
 <body style="background-color: #FFFFFF; min-height: 100vh; margin: 0; padding: 0;">
 
-
-<!-- NAVBAR ADMIN -->
 <!-- NAVBAR ADMIN -->
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #EDE4CA; font-family: 'Cambria', sans-serif;">
     <div class="container">
 
-        <!-- Logo y nombre del usuario -->
+        <!-- Logo y nombre -->
         <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
             <img src="{{ asset('imagenes/logos/2A_Logo_blanco_circulo_MORADO.png') }}" 
-                alt="Logo" 
-                width="35" 
-                height="35" 
-                class="d-inline-block me-2">
+                 width="35" height="35" class="d-inline-block me-2">
             <span style="color: #4a4a4a;">{{ Auth::user()->name ?? '-' }}</span>
         </a>
 
-        <!-- Botón hamburguesa (móvil) -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAdmin" 
-            aria-controls="navbarAdmin" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAdmin">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Contenido colapsable -->
         <div class="collapse navbar-collapse" id="navbarAdmin">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                {{-- 🔒 Administradores → sólo SuperAdmin --}}
-                @if(auth()->user()->hasRole(['SuperAdmin', 'Desarrollador']))
+                {{-- Administradores --}}
+                @can('Usuarios Crear')
                     <li class="nav-item px-2">
-                        <a class="nav-link {{ request()->routeIs('admin.users.index') ? 'active fw-bold' : '' }}" 
-                        href="{{ route('admin.users.index') }}"
-                        style="color: #4a4a4a !important;">
+                        <a class="nav-link {{ request()->routeIs('admin.users.index') ? 'active fw-bold' : '' }}"
+                           href="{{ route('admin.users.index') }}">
                             Administradores
                         </a>
                     </li>
-                @endif
+                @endcan
 
-                {{-- 🔒 Roles y Permisos → sólo Desarrollador --}}
-                @if(auth()->user()->hasRole('Desarrollador'))
+                {{-- Roles --}}
+                @can('Roles Crear')
                     <li class="nav-item px-2">
-                        <a class="nav-link {{ request()->routeIs('admin.roles.index') ? 'active fw-bold' : '' }}" 
-                        href="{{ route('admin.roles.index') }}"
-                        style="color: #4a4a4a !important;">
+                        <a class="nav-link {{ request()->routeIs('admin.roles.index') ? 'active fw-bold' : '' }}"
+                           href="{{ route('admin.roles.index') }}">
                             Roles
                         </a>
                     </li>
+                @endcan
 
+                {{-- Permisos --}}
+                @can('Permisos Crear')
                     <li class="nav-item px-2">
-                        <a class="nav-link {{ request()->routeIs('admin.permissions.index') ? 'active fw-bold' : '' }}" 
-                        href="{{ route('admin.permissions.index') }}"
-                        style="color: #4a4a4a !important;">
+                        <a class="nav-link {{ request()->routeIs('admin.permissions.index') ? 'active fw-bold' : '' }}"
+                           href="{{ route('admin.permissions.index') }}">
                             Permisos
                         </a>
                     </li>
-                @endif
+                @endcan
 
-                <!-- Comité editorial -->
+                {{-- Comité editorial --}}
+                @can('Comite Crear')
                 <li class="nav-item px-2">
-                    <a class="nav-link {{ request()->routeIs('admin.comite_editorial.index') ? 'active fw-bold' : '' }}" 
-                       href="{{ route('admin.comite_editorial.index') }}"
-                       style="color: #4a4a4a !important;">
+                    <a class="nav-link {{ request()->routeIs('admin.comite_editorial.index') ? 'active fw-bold' : '' }}"
+                       href="{{ route('admin.comite_editorial.index') }}">
                         Comité editorial
                     </a>
                 </li>
+                @endcan
 
-                <!-- Publicaciones -->
+                {{-- Publicaciones --}}
+                @can('Publicaciones Crear')
                 <li class="nav-item px-2">
-                    <a class="nav-link {{ request()->routeIs('admin.publicaciones.index') ? 'active fw-bold' : '' }}" 
-                       href="{{ route('admin.publicaciones.index') }}"
-                       style="color: #4a4a4a !important;">
+                    <a class="nav-link {{ request()->routeIs('admin.publicaciones.index') ? 'active fw-bold' : '' }}"
+                       href="{{ route('admin.publicaciones.index') }}">
                         Publicaciones
                     </a>
                 </li>
+                @endcan
 
-                <!-- Dropdown Libros -->
+                {{-- Dropdown Libros (si puede Crear cualquier submódulo) --}}
+                @canany(['Autores Crear', 'Series Crear', 'Capitulos Crear', 'Colecciones Crear', 'Libros Crear'])
                 <li class="nav-item dropdown px-2">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
-                       style="color: #4a4a4a;">
-                        Libros
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ route('admin.autores.index') }}">Autores</a></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.series.index') }}">Series</a></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.capitulos.index') }}">Capítulos</a></li>
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Libros</a>
 
-                        {{-- 🔒 Colecciones → sólo Desarrollador --}}
-                        @if(auth()->user()->hasRole('Desarrollador'))
+                    <ul class="dropdown-menu">
+
+                        @can('Autores Crear')
+                            <li><a class="dropdown-item" href="{{ route('admin.autores.index') }}">Autores</a></li>
+                        @endcan
+
+                        @can('Series Crear')
+                            <li><a class="dropdown-item" href="{{ route('admin.series.index') }}">Series</a></li>
+                        @endcan
+
+                        @can('Capitulos Crear')
+                            <li><a class="dropdown-item" href="{{ route('admin.capitulos.index') }}">Capítulos</a></li>
+                        @endcan
+
+                        @can('Colecciones Crear')
                             <li><a class="dropdown-item" href="{{ route('admin.tipos.index') }}">Colecciones</a></li>
-                        @endif
+                        @endcan
 
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="{{ route('admin.libros.index') }}">Libros</a></li>
+
+                        @can('Libros Crear')
+                            <li><a class="dropdown-item" href="{{ route('admin.libros.index') }}">Libros</a></li>
+                        @endcan
+
                     </ul>
                 </li>
+                @endcanany
 
             </ul>
 
-            <!-- Right side: logout -->
+            <!-- Logout -->
             <ul class="navbar-nav ms-auto">
                 @guest
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                 @else
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre
-                           style="color: #4a4a4a;">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                             {{ Auth::user()->name }}
                         </a>
-
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu dropdown-menu-end">
                             <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Logout
                             </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            <form id="logout-form" method="POST" action="{{ route('logout') }}">
                                 @csrf
                             </form>
                         </div>
@@ -140,10 +139,9 @@
                 @endguest
             </ul>
         </div>
+
     </div>
 </nav>
-
-
 
 <!-- {{-- HERO con logo a lo largo de la pantalla --}} -->
 <section class="w-100" style="background-color: transparent; padding: 0; margin: 0;">
@@ -160,47 +158,6 @@
     <div style="background-color: #FFFFFF; font-family: 'Cambria', sans-serif; padding-bottom: 50px;">  <!-- Color del Fondo y tipografía -->
         @yield('contenido') 
     </div>
-
-    {{-- <!-- FOOTER -->
-<footer class="pt-5" style="background-color: #EDE4CA; font-family: 'Cambria', sans-serif; color: #4a4a4a;">
-    <div class="container">
-        <div class="row text-center text-md-start justify-content-center">
-
-            <!-- Dirección -->
-            <div class="col-md-4 mb-4">
-                <i class="bi bi-geo-alt-fill fs-4" style="color: #34142F;"></i>
-                <h6 class="mt-2 fw-bold" style="color: #34142F;">Dirección</h6>
-                <p class="small mb-0">
-                    Estudios Mesoamericanos y Mexicanos Ave. Parres Arias Núm. 150<br>
-                    Esquina con periférico norte<br>
-                    Colonia San José del Bajío, C.P. 45132<br>
-                    Zapopan, Jalisco, México<br>
-                    Edificio A Planta Baja, Núcleo Los Belenes
-                </p>
-            </div>
-
-            <!-- Teléfono -->
-            <div class="col-md-4 mb-4">
-                <i class="bi bi-telephone-fill fs-4" style="color: #34142F;"></i>
-                <h6 class="mt-2 fw-bold" style="color: #34142F;">Teléfono</h6>
-                <p class="small mb-0">(33) 3819-3365, Ext. 23365</p>
-            </div>
-
-            <!-- Correo -->
-            <div class="col-md-4 mb-4">
-                <i class="bi bi-envelope-fill fs-4" style="color: #34142F;"></i>
-                <h6 class="mt-2 fw-bold" style="color: #34142F;">Correo</h6>
-                <p class="small mb-0">edh.cucsh@academicos.udg.mx</p>
-            </div>
-
-        </div>
-
-        <div class="text-center py-3 border-top" style="border-color: #34142F;">
-            <small>&copy; 2025 Estudios Humanidad</small>
-        </div>
-    </div>
-</footer> --}}
-
 
 
 </body>

@@ -39,10 +39,10 @@ class AppServiceProvider extends ServiceProvider
         });
 
         /**
-         * 2. BACKDOOR PARA PROGRAMADOR
+         * 2. BACKDOOR PARA Desarrollador
          */
         Gate::before(function (User $user, $ability) {
-            if ($user->hasRole('Programador')) {
+            if ($user->hasRole('Desarrollador')) {
                 return true;
             }
         });
