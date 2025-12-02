@@ -40,8 +40,7 @@ class InicioController extends Controller
     }
 
 
-
-    public function buscarNOSIRVE(Request $request)
+    public function buscar(Request $request)
     {
         $q = $request->input('q');
 
@@ -52,29 +51,22 @@ class InicioController extends Controller
             ]);
         }
 
-        try {
-            // Intentar consultar la vista 'relaciones'
-            $test = DB::table('relaciones')->limit(1)->get();
+        $resultados = DB::table('vista_busqueda')
+            ->where(function ($query) use ($q) {
+                $query->where('titulo', 'like', "%{$q}%")
+                    ->orWhere('descripcion', 'like', "%{$q}%")
+                    ->orWhere('nombre_autor', 'like', "%{$q}%");
+            })
+            ->get();
 
-            // Buscar con Scout
-            $resultados = Relacion::search($q)->get();
-        } catch (\Exception $e) {
-            // Si falla la base de datos, la vista, Scout, etc.
-            return view('general.resultados', [
-                'resultados' => collect(),
-                'q' => $q
-            ]);
-        }
-
-        // Ordenar según coincidencia
+        // Ordenar resultados
         $resultados = $resultados->sortBy(function ($item) use ($q) {
+            $qLower = strtolower($q);
+            $tituloLower = strtolower($item->titulo ?? '');
 
-            $titulo = strtolower($item->titulo);
-            $query  = strtolower($q);
-
-            if ($titulo === $query) return 1;
-            if (str_starts_with($titulo, $query)) return 2;
-            if (str_contains($titulo, $query)) return 3;
+            if ($tituloLower === $qLower) return 1;
+            if (str_starts_with($tituloLower, $qLower)) return 2;
+            if (str_contains($tituloLower, $qLower)) return 3;
 
             return 4;
         });
@@ -84,88 +76,6 @@ class InicioController extends Controller
             'q' => $q
         ]);
     }
-
-    public function buscarMENOSVIEJO(Request $request)
-{
-    $q = $request->input('q');
-
-    if (!$q) {
-        return view('general.resultados', [
-            'resultados' => collect(),
-            'q' => ''
-        ]);
-    }
-
-    try {
-        // Buscar en los campos correctos de la vista 'relaciones'
-        $resultados = DB::table('vista_busqueda')
-            ->where('titulo_libro', 'like', "%{$q}%")
-            ->orWhere('titulo_publicacion', 'like', "%{$q}%")
-            ->orWhere('descripcion_publicacion', 'like', "%{$q}%")
-            ->orWhere('nombre_autor', 'like', "%{$q}%")
-            ->get();
-
-    } catch (\Exception $e) {
-        return view('general.resultados', [
-            'resultados' => collect(),
-            'q' => $q
-        ]);
-    }
-
-    // Ordenar resultados: coincidencia exacta > empieza con > contiene > resto
-    $resultados = $resultados->sortBy(function ($item) use ($q) {
-        $qLower = strtolower($q);
-        $tituloLower = strtolower($item->titulo_libro ?? '');
-
-        if ($tituloLower === $qLower) return 1;
-        if (str_starts_with($tituloLower, $qLower)) return 2;
-        if (str_contains($tituloLower, $qLower)) return 3;
-
-        return 4;
-    });
-
-    return view('general.resultados', [
-        'resultados' => $resultados,
-        'q' => $q
-    ]);
-}
-
-public function buscar(Request $request)
-{
-    $q = $request->input('q');
-
-    if (!$q) {
-        return view('general.resultados', [
-            'resultados' => collect(),
-            'q' => ''
-        ]);
-    }
-
-    $resultados = DB::table('vista_busqueda')
-        ->where(function ($query) use ($q) {
-            $query->where('titulo', 'like', "%{$q}%")
-                ->orWhere('descripcion', 'like', "%{$q}%")
-                ->orWhere('nombre_autor', 'like', "%{$q}%");
-        })
-        ->get();
-
-    // Ordenar resultados
-    $resultados = $resultados->sortBy(function ($item) use ($q) {
-        $qLower = strtolower($q);
-        $tituloLower = strtolower($item->titulo ?? '');
-
-        if ($tituloLower === $qLower) return 1;
-        if (str_starts_with($tituloLower, $qLower)) return 2;
-        if (str_contains($tituloLower, $qLower)) return 3;
-
-        return 4;
-    });
-
-    return view('general.resultados', [
-        'resultados' => $resultados,
-        'q' => $q
-    ]);
-}
 
 
 
