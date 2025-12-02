@@ -52,7 +52,7 @@
                         </form>
                     </td> --}}
                     {{-- <x-acciones-crud :model="$publicacion" :routeName="'publicaciones'"/> --}}
-                    <x-acciones-crud :model="$publicaciones" routeName="publicaciones" tipo="Publicaciones" />
+                    <x-acciones-crud :model="$publicacion" routeName="publicaciones" tipo="Publicaciones" />
                 </tr>
             @empty
                 <tr>
