@@ -5,60 +5,77 @@ use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
-    /** 2025_12_01_000000_create_vista_relaciones
-     * 0001_01_01_000000_create_vista_relaciones
-     * 0001_01_01_000000_create_users_table
-     * 
-     * Run the migrations.
-     */
     public function up(): void
     {
         DB::statement("
-            CREATE OR REPLACE VIEW relaciones AS
-            select
+            CREATE OR REPLACE VIEW vista_busqueda AS
+            
+
+            SELECT
                 libros.id AS id,
                 libros.titulo AS titulo,
                 libros.slug AS slug,
                 libros.volumen AS volumen,
                 libros.anio AS anio,
-                libros.resumen AS resumen,
+                libros.resumen AS descripcion,  -- se renombra para coincidir con publicaciones
                 libros.cita AS cita,
                 libros.isbn AS isbn,
                 libros.isbn_coleccion AS isbn_coleccion,
                 libros.palabras_clave AS palabras_clave,
                 libros.resena AS resena,
                 libros.doi AS doi,
-                libros.pdf AS pdf,
-                libros.imagen AS imagen,
                 libros.estado AS estado,
-                libros.series_id AS series_id,
-                libros.tipos_id AS tipos_id,
-                libros.deleted_at AS deleted_at,
-                libros.created_at AS created_at,
-                libros.updated_at AS updated_at,
-                GROUP_CONCAT(DISTINCT CONCAT(autores.nombre, ' ', autores.apellido) 
-                    SEPARATOR ', ') AS nombre
-            from libros
-            left join libro_autor on libros.id = libro_autor.libro_id
-            left join autores on libro_autor.autor_id = autores.id
-            where libros.deleted_at is null
-                and libros.estado = 1
-                and (autores.deleted_at is null or autores.id is null)
-                and (autores.estado = 1 or autores.id is null)
-            group by libros.id, libros.titulo, libros.slug, libros.volumen,
-                     libros.anio, libros.resumen, libros.cita, libros.isbn,
-                     libros.isbn_coleccion, libros.palabras_clave, libros.resena,
-                     libros.doi, libros.pdf, libros.imagen, libros.estado,
-                     libros.series_id, libros.tipos_id, libros.deleted_at,
-                     libros.created_at, libros.updated_at
+
+                GROUP_CONCAT(
+                    DISTINCT CONCAT(autores.nombre, ' ', autores.apellido)
+                    SEPARATOR ', '
+                ) AS nombre_autor,
+
+                'libro' AS tipo
+
+            FROM libros
+            LEFT JOIN libro_autor ON libros.id = libro_autor.libro_id
+            LEFT JOIN autores ON libro_autor.autor_id = autores.id
+
+            WHERE libros.deleted_at IS NULL
+              AND libros.estado = 1
+
+            GROUP BY
+                libros.id, libros.titulo, libros.slug, libros.volumen, libros.anio,
+                libros.resumen, libros.cita, libros.isbn, libros.isbn_coleccion,
+                libros.palabras_clave, libros.resena, libros.doi, libros.estado,
+
+
+            UNION ALL
+
+
+            SELECT
+                publicaciones.id AS id,
+                publicaciones.titulo AS titulo,
+                NULL AS slug,
+                NULL AS volumen,
+                NULL AS anio,
+                publicaciones.descripcion AS descripcion,
+                NULL AS cita,
+                NULL AS isbn,
+                NULL AS isbn_coleccion,
+                NULL AS palabras_clave,
+                NULL AS resena,
+                NULL AS doi,
+                publicaciones.estado AS estado,
+                NULL AS nombre_autor,
+                'publicacion' AS tipo
+
+            FROM publicaciones
+
+            WHERE publicaciones.deleted_at IS NULL
+              AND publicaciones.estado = 1;
+
         ");
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        DB::statement("DROP VIEW IF EXISTS relaciones");
+        DB::statement("DROP VIEW IF EXISTS vista_busqueda");
     }
 };

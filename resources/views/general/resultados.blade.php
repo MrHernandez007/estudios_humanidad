@@ -49,39 +49,61 @@
             @else
 
                 <ul class="list-unstyled">
-                    @foreach($resultados as $libro)
+                    @foreach($resultados as $item)
                         <li class="py-3">
 
-                            {{-- Título --}}
-                            <h3 class="font-bold text-lg">{{ $libro->titulo }}</h3>
+                            {{-- -------------------------- --}}
+                            {{-- CONTENIDO SI ES LIBRO      --}}
+                            {{-- -------------------------- --}}
+                            @if($item->tipo === 'libro')
 
-                            {{-- Volumen --}}
-                            @if($libro->volumen)
-                                <p><strong>Volumen:</strong> {{ $libro->volumen }}</p>
+                                <h3 class="font-bold text-lg">{{ $item->titulo }}</h3>
+
+                                @if($item->volumen)
+                                    <p><strong>Volumen:</strong> {{ $item->volumen }}</p>
+                                @endif
+
+                                @if($item->anio)
+                                    <p><strong>Año:</strong> {{ $item->anio }}</p>
+                                @endif
+
+                                @if($item->nombre_autor)
+                                    <p><strong>Autor(es):</strong> {{ $item->nombre_autor }}</p>
+                                @endif
+
+                                <a href="{{ route('general.libro.detalle', $item->id) }}" 
+                                    class="btn btn-sm" 
+                                    style="background-color:#34142F; color:white;">
+                                    Ver detalle
+                                </a>
+
                             @endif
 
-                            {{-- Año --}}
-                            @if($libro->anio)
-                                <p><strong>Año:</strong> {{ $libro->anio }}</p>
-                            @endif
 
 
-                            @if($libro->nombre)
-                                <p><strong>Autor(es):</strong> {{ $libro->nombre }} {{ $libro->apellido }}</p>
-                            @endif
+                            {{-- ------------------------------ --}}
+                            {{-- CONTENIDO SI ES PUBLICACIÓN    --}}
+                            {{-- ------------------------------ --}}
+                            @if($item->tipo === 'publicacion')
+
+    <h3 class="font-bold text-lg">{{ $item->titulo }}</h3>
+
+    @if($item->descripcion)
+        <p><strong>Descripción:</strong> {{ $item->descripcion }}</p>
+    @endif
+
+    {{-- Botón para ver detalle de la publicación --}}
+    <a href="{{ route('general.publicacion.detalle', $item->id) }}" 
+        class="btn btn-sm" 
+        style="background-color:#34142F; color:white;">
+        Ver detalle
+    </a>
+
+@endif
 
 
-                            {{-- DOI --}}
-                            {{-- @if($libro->doi)
-                                <p><strong>DOI:</strong> {{ $libro->doi }}</p>
-                            @endif --}}
 
-                            {{-- Botón de detalle --}}
-                            <a href="{{ route('general.libro.detalle', $libro->id) }}" 
-                               class="btn btn-sm" 
-                               style="background-color:#34142F; color:white;">
-                                Ver detalle
-                            </a>
+
 
                             {{-- Línea separadora --}}
                             @if(!$loop->last)
@@ -97,6 +119,7 @@
         </div>
     </div>
 </div>
+
 
 
 
