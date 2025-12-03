@@ -27,7 +27,7 @@ class InicioController extends Controller
         // Traer los tipos para el navbar, las colecciones.
         $tipos = Tipo::orderBy('id')->get();
 
-        return view('general.inicio', compact('comite', 'publicaciones', 'tipos'));
+        return view('general.Inicio', compact('comite', 'publicaciones', 'tipos'));
     }
 
     public function publicacionDetalle($id)

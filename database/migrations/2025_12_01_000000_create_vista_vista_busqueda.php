@@ -43,7 +43,7 @@ return new class extends Migration
             GROUP BY
                 libros.id, libros.titulo, libros.slug, libros.volumen, libros.anio,
                 libros.resumen, libros.cita, libros.isbn, libros.isbn_coleccion,
-                libros.palabras_clave, libros.resena, libros.doi, libros.estado,
+                libros.palabras_clave, libros.resena, libros.doi, libros.estado
 
 
             UNION ALL
